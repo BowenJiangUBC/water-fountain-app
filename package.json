@@ -9,6 +9,8 @@
   "author": "Bowen Jiang",
   "license": "ISC",
   "dependencies": {
+    "google-maps-react": "^1.1.0",
+    "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.6",
