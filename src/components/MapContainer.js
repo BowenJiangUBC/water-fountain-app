@@ -2,10 +2,30 @@
  * Created by bowenjiang on 10/24/17.
  */
 import React from 'react';
-import { InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import Map from './Map'
+import {GoogleApiWrapper} from 'google-maps-react';
+import Map from './Map';
+import Marker from './Marker'
 
 export class MapContainer extends React.Component {
+
+    componentWillMount(){
+    	this.setState({
+    		fountains:[
+    			{
+    				building: "MET",
+    				lat: 42.3504, lng: -71.1076
+    			},
+    			{
+    				building: "CAS",
+    				lat: 42.3503, lng: -71.1049
+    			},
+    			{
+    				building: "COMM",
+    				lat: 42.3489, lng: -71.1025
+    			}
+    		]
+    	})
+    };
 
     render(){
         const style={
@@ -20,9 +40,9 @@ export class MapContainer extends React.Component {
 
         return(
             <div style={style}>
-                <Map
-                    google={this.props.google}
-                />
+                <Map google={this.props.google}>
+                    <Marker fountains={this.state.fountains} />
+                </Map>
 
             </div>
         )

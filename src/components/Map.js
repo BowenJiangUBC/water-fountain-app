@@ -79,10 +79,26 @@ export default class Map extends React.Component{
                 center: center,
                 zoom: zoom
             });
-            this.refs.map = new maps.Map(node, mapConfig);
+            this.map = new maps.Map(node, mapConfig);
         }
     };
 
+    renderChildren(){
+        const {children} = this.props;
+
+        if (!children) return;
+
+
+        return React.Children.map(children, c => {
+            return React.cloneElement(c, {
+                map: this.map,
+                google: this.props.google,
+                position: this.state.currentLocation,
+                mapCenter:this.props.initialCenter
+            });
+        });
+
+    };
 
 
     render() {
@@ -93,6 +109,7 @@ export default class Map extends React.Component{
         return (
             <div style={style} ref='map'>
                 Loading map...
+                {this.renderChildren()}
             </div>
         )
     }
@@ -106,12 +123,11 @@ Map.propTypes = {
 };
 
 Map.defaultProps = {
-    zoom: 14,
+    zoom: 15,
     // Boston University
     initialCenter: {
-        lat: 49.2606,
-        lng: 123.2460
+        lat: 42.3505, lng: -71.1054
     },
-    centerAroundCurrentLocation: false
+    centerAroundCurrentLocation: true
 };
 

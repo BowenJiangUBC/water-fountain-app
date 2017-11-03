@@ -11503,23 +11503,27 @@ var App = function (_React$Component) {
 	}
 
 	(0, _createClass3.default)(App, [{
-		key: 'componentWillMount',
-		value: function componentWillMount() {
-			this.setState({
-				fountains: [{
-					building: "MET",
-					lat: 42.3504, lng: -71.1076
-				}, {
-					building: "CAS",
-					lat: 42.3503, lng: -71.1049
-				}, {
-					building: "COMM",
-					lat: 42.3489, lng: -71.1025
-				}]
-			});
-		}
-	}, {
 		key: 'render',
+
+		// componentWillMount(){
+		// 	this.setState({
+		// 		fountains:[
+		// 			{
+		// 				building: "MET",
+		// 				lat: 42.3504, lng: -71.1076
+		// 			},
+		// 			{
+		// 				building: "CAS",
+		// 				lat: 42.3503, lng: -71.1049
+		// 			},
+		// 			{
+		// 				building: "COMM",
+		// 				lat: 42.3489, lng: -71.1025
+		// 			}
+		// 		]
+		// 	})
+		// };
+
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
@@ -25985,7 +25989,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.Map = undefined;
 
 var _assign = __webpack_require__(290);
 
@@ -26024,30 +26027,74 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Created by bowenjiang on 10/25/17.
  */
-var Map = exports.Map = function (_React$Component) {
+var Map = function (_React$Component) {
     (0, _inherits3.default)(Map, _React$Component);
 
-    function Map() {
+    function Map(props) {
         (0, _classCallCheck3.default)(this, Map);
-        return (0, _possibleConstructorReturn3.default)(this, (Map.__proto__ || (0, _getPrototypeOf2.default)(Map)).apply(this, arguments));
+
+        var _this = (0, _possibleConstructorReturn3.default)(this, (Map.__proto__ || (0, _getPrototypeOf2.default)(Map)).call(this, props));
+
+        var _this$props$initialCe = _this.props.initialCenter,
+            lat = _this$props$initialCe.lat,
+            lng = _this$props$initialCe.lng;
+
+        _this.state = {
+            currentLocation: {
+                lat: lat,
+                lng: lng
+            }
+        };
+        return _this;
     }
 
     (0, _createClass3.default)(Map, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            if (this.props.centerAroundCurrentLocation) {
+                if (navigator && navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (pos) {
+                        var coords = pos.coords;
+                        _this2.setState({
+                            currentLocation: {
+                                lat: coords.latitude,
+                                lng: coords.longitude
+                            }
+                        });
+                    });
+                }
+            }
+            this.loadMap();
+        }
+    }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps, prevState) {
             if (prevProps.google !== this.props.google) {
                 this.loadMap();
             }
+            if (prevState.currentLocation !== this.state.currentLocation) {
+                this.recenterMap();
+            }
         }
     }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.loadMap();
+        key: 'recenterMap',
+        value: function recenterMap() {
+            var map = this.map;
+            var curr = this.state.currentLocation;
+
+            var google = this.props.google;
+            var maps = google.maps;
+
+            if (map) {
+                var center = new maps.LatLng(curr.lat, curr.lng);
+                map.panTo(center);
+            }
         }
     }, {
         key: 'loadMap',
         value: function loadMap() {
-            console.log("loading Maps");
             if (this.props && this.props.google) {
                 // google is available
                 var google = this.props.google;
@@ -26057,43 +26104,55 @@ var Map = exports.Map = function (_React$Component) {
                 var mapRef = this.refs.map;
                 var node = _reactDom2.default.findDOMNode(mapRef);
 
-                var zoom = 14;
-                var lat = 37.774929;
-                var lng = -122.419416;
+                var zoom = this.props.zoom;
+                var _state$currentLocatio = this.state.currentLocation,
+                    lat = _state$currentLocatio.lat,
+                    lng = _state$currentLocatio.lng;
+
                 var center = new maps.LatLng(lat, lng);
                 var mapConfig = (0, _assign2.default)({}, {
                     center: center,
                     zoom: zoom
                 });
-                this.map = new maps.Map(node, mapConfig);
-                console.log(this.map);
+                this.refs.map = new maps.Map(node, mapConfig);
             }
         }
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement('div', { ref: 'map' });
+            var style = {
+                minWidth: '400px',
+                minHeight: '400px'
+            };
+            return _react2.default.createElement(
+                'div',
+                { style: style, ref: 'map' },
+                'Loading map...'
+            );
         }
     }]);
     return Map;
 }(_react2.default.Component);
 
-// Map.propTypes = {
-//     google: React.PropTypes.object,
-//     zoom: React.PropTypes.number,
-//     initialCenter: React.PropTypes.object
-// };
-//
-// Map.defaultProps ={
-//     zoom: 14,
-//     // San Francisco, by default
-//     initialCenter: {
-//         lat: 42.3505,
-//         lng: -71.1054
-//     }
-// };
-
 exports.default = Map;
+
+
+Map.propTypes = {
+    google: _react2.default.PropTypes.object,
+    zoom: _react2.default.PropTypes.number,
+    initialCenter: _react2.default.PropTypes.object,
+    centerAroundCurrentLocation: _react2.default.PropTypes.bool
+};
+
+Map.defaultProps = {
+    zoom: 14,
+    // Boston University
+    initialCenter: {
+        lat: 49.2606,
+        lng: 123.2460
+    },
+    centerAroundCurrentLocation: false
+};
 
 /***/ }),
 /* 290 */
