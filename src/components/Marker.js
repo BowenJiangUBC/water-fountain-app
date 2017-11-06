@@ -5,6 +5,13 @@ import React from 'react';
 
 export default class Marker extends React.Component{
 
+    constructor(props) {
+        super(props);
+
+        let {onClick} = this.props;
+
+    };
+
     componentDidUpdate(prevProps) {
         if ((this.props.map !== prevProps.map) ||
             (this.props.position !== prevProps.position)) {
@@ -16,12 +23,31 @@ export default class Marker extends React.Component{
     renderMarker() {
         // ...
         let {
-            map, google, position, mapCenter, fountains
+            map, google, position, mapCenter, buildings,
         } = this.props;
-
 
         let pos = position || mapCenter;
         position = new google.maps.LatLng(pos.lat, pos.lng);
+
+        const bldgPos = buildings.map((building) =>{
+            return(
+                new google.maps.LatLng(building.lat,building.lng)
+            );
+        });
+
+        const bldgIcon = {
+            url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
+            scaledSize: new google.maps.Size(30,30)
+        };
+
+        const bldgPref = {
+            map:map,
+            icon:bldgIcon
+        };
+
+        this.bldgMarkers = bldgPos.map((b)=>{
+            return(new google.maps.Marker(Object.assign(bldgPref, {position:b})))
+        });
 
         const locIcon = {
             url: 'http://icons.iconarchive.com/icons/hopstarter/soft-scraps/256/Button-Blank-Blue-icon.png',
@@ -37,31 +63,14 @@ export default class Marker extends React.Component{
         };
         this.locMarker = new google.maps.Marker(locPref);
 
-        const founPos = fountains.map((fountain) =>{
-            return(
-                new google.maps.LatLng(fountain.lat,fountain.lng)
-            );
-        });
-
-        const founIcon = {
-            url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
-            scaledSize: new google.maps.Size(30,30)
-        };
-
-        const founPref = {
-            map:map,
-            icon:founIcon
-        };
-
-        this.founMarkers = founPos.map((f)=>{
-            return(new google.maps.Marker(Object.assign(founPref, {position:f})))
-        });
-
 
     };
 
     render(){
-        return(<div>
+        return(<div onClick={this.onClick}>
+            <div >
+
+            </div>
 
         </div>)
     }

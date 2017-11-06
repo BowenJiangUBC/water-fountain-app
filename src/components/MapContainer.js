@@ -4,27 +4,70 @@
 import React from 'react';
 import {GoogleApiWrapper} from 'google-maps-react';
 import Map from './Map';
-import Marker from './Marker'
+import Marker from './Marker';
+import InfoWindow from './InfoWindow';
 
 export class MapContainer extends React.Component {
 
-    componentWillMount(){
-    	this.setState({
-    		fountains:[
-    			{
-    				building: "MET",
-    				lat: 42.3504, lng: -71.1076
-    			},
-    			{
-    				building: "CAS",
-    				lat: 42.3503, lng: -71.1049
-    			},
-    			{
-    				building: "COMM",
-    				lat: 42.3489, lng: -71.1025
-    			}
-    		]
-    	})
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showingInfoWindow: false,
+            activeMarker: {},
+            selectedPlace:{},
+            buildings:[
+                {
+                    buildingName: "Metropolitan College",
+                    address: "",
+                    lat: 42.3504, lng: -71.1076,
+                    fountains:[
+                        {
+                            floor:1,
+                            description: "Next to room 1xx"
+                        },
+                        {
+                            floor: 3,
+                            description: "Next to room 3xx"
+                        }
+                    ]
+                },
+                {
+                    buildingName: "College of Art and Science",
+                    address: "",
+                    lat: 42.3503, lng: -71.1049,
+                    fountains:[
+                        {
+                            floor:1,
+                            description: "Next to room 1xx"
+                        },
+                        {
+                            floor: 3,
+                            description: "Next to room 3xx"
+                        }
+                    ]
+                },
+                {
+                    buildingName: "College of Communication",
+                    address: "",
+                    lat: 42.3489, lng: -71.1025,
+                    fountains:[
+                        {
+                            floor:1,
+                            description: "Next to room 1xx"
+                        },
+                        {
+                            floor: 3,
+                            description: "Next to room 3xx"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+
+    onMarkerClick(props, marker, e){
+        console.log("Marker Clicked!");
     };
 
     render(){
@@ -33,15 +76,16 @@ export class MapContainer extends React.Component {
             height: '90vh'
         };
 
-        const bu={
-            lat: 42.3505,
-            lng: -71.1054
-        };
-
         return(
             <div style={style}>
                 <Map google={this.props.google}>
-                    <Marker fountains={this.state.fountains} />
+                    <Marker
+                        buildings={this.state.buildings}
+                        onClick={this.onMarkerClick}
+                    />
+                    <InfoWindow>
+
+                    </InfoWindow>
                 </Map>
 
             </div>
