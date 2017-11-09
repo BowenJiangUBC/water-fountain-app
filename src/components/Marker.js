@@ -49,6 +49,12 @@ export default class Marker extends React.Component{
             return(new google.maps.Marker(Object.assign(bldgPref, {position:b})))
         });
 
+        this.bldgMarkers.map((marker)=>{
+            marker.addListener('click', (evt)=>{
+                this.props.onClick(marker)
+            });
+        });
+
         const locIcon = {
             url: 'http://icons.iconarchive.com/icons/hopstarter/soft-scraps/256/Button-Blank-Blue-icon.png',
             // This marker is 20 pixels wide by 32 pixels high.

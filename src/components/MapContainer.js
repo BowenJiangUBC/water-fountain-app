@@ -12,10 +12,13 @@ export class MapContainer extends React.Component {
     constructor(props) {
         super(props);
 
+        this.onMarkerClick = this.onMarkerClick.bind(this);
+
+
         this.state = {
             showingInfoWindow: false,
             activeMarker: {},
-            selectedPlace:{},
+            selectedPlace: "",
             buildings:[
                 {
                     buildingName: "Metropolitan College",
@@ -66,8 +69,13 @@ export class MapContainer extends React.Component {
         }
     }
 
-    onMarkerClick(props, marker, e){
-        console.log("Marker Clicked!");
+    onMarkerClick(marker){
+        this.setState({
+            activeMarker: marker,
+            selectedPlace: '<div>Come on man</div> ',
+            showingInfoWindow: true
+        });
+        console.log("Marker clicked! Now setting Marker to ", marker.getPosition().lat())
     };
 
     render(){
@@ -82,9 +90,16 @@ export class MapContainer extends React.Component {
                     <Marker
                         buildings={this.state.buildings}
                         onClick={this.onMarkerClick}
+                        addMarker={this.addMarker}
                     />
-                    <InfoWindow>
-
+                    <InfoWindow
+                        {...this.props}
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}
+                    >
+                        <div>
+                            <h4>{this.props.selectedPlace}</h4>
+                        </div>
                     </InfoWindow>
                 </Map>
 
