@@ -72,10 +72,9 @@ export class MapContainer extends React.Component {
     onMarkerClick(marker){
         this.setState({
             activeMarker: marker,
-            selectedPlace: '<div>Come on man</div> ',
+            selectedPlace: marker.getTitle(),
             showingInfoWindow: true
         });
-        console.log("Marker clicked! Now setting Marker to ", marker.getPosition().lat())
     };
 
     render(){
@@ -98,7 +97,7 @@ export class MapContainer extends React.Component {
                         visible={this.state.showingInfoWindow}
                     >
                         <div>
-                            <h4>{this.props.selectedPlace}</h4>
+                            <h4>{this.state.selectedPlace}</h4>
                         </div>
                     </InfoWindow>
                 </Map>

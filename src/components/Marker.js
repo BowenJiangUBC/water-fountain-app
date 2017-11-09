@@ -30,9 +30,10 @@ export default class Marker extends React.Component{
         position = new google.maps.LatLng(pos.lat, pos.lng);
 
         const bldgPos = buildings.map((building) =>{
-            return(
-                new google.maps.LatLng(building.lat,building.lng)
-            );
+            return({
+                position:  new google.maps.LatLng(building.lat,building.lng),
+                title: building.buildingName
+            });
         });
 
         const bldgIcon = {
@@ -46,7 +47,7 @@ export default class Marker extends React.Component{
         };
 
         this.bldgMarkers = bldgPos.map((b)=>{
-            return(new google.maps.Marker(Object.assign(bldgPref, {position:b})))
+            return(new google.maps.Marker(Object.assign(bldgPref, b)))
         });
 
         this.bldgMarkers.map((marker)=>{
