@@ -23982,10 +23982,9 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
         value: function onMarkerClick(marker) {
             this.setState({
                 activeMarker: marker,
-                selectedPlace: '<div>Come on man</div> ',
+                selectedPlace: marker.getTitle(),
                 showingInfoWindow: true
             });
-            console.log("Marker clicked! Now setting Marker to ", marker.getPosition().lat());
         }
     }, {
         key: 'render',
@@ -24004,21 +24003,19 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
                     _react2.default.createElement(_Marker2.default, {
                         buildings: this.state.buildings,
                         onClick: this.onMarkerClick,
-                        addMarker: this.addMarker
-                    }),
+                        addMarker: this.addMarker }),
                     _react2.default.createElement(
                         _InfoWindow2.default,
                         (0, _extends3.default)({}, this.props, {
                             marker: this.state.activeMarker,
-                            visible: this.state.showingInfoWindow
-                        }),
+                            visible: this.state.showingInfoWindow }),
                         _react2.default.createElement(
                             'div',
                             null,
                             _react2.default.createElement(
                                 'h4',
                                 null,
-                                this.props.selectedPlace
+                                this.state.selectedPlace
                             )
                         )
                     )
@@ -26451,11 +26448,7 @@ var Marker = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { onClick: this.onClick },
-                _react2.default.createElement('div', null)
-            );
+            return null;
         }
     }]);
     return Marker;
@@ -26531,25 +26524,23 @@ var InfoWindow = function (_React$Component) {
             var children = this.props.children;
 
             return _server2.default.renderToString(children);
-            console.log("render children");
         }
     }, {
         key: 'openWindow',
         value: function openWindow() {
-            this.infowindow.open(this.props.map, this.props.marker);
 
-            console.log("open window");
+            this.infowindow.open(this.props.map, this.props.marker);
         }
     }, {
         key: 'closeWindow',
         value: function closeWindow() {
-            // this.infowindow.close();
-            console.log("close window!");
+
+            this.infowindow.close();
         }
     }, {
         key: 'componentDidUpdate',
         value: function componentDidUpdate(prevProps) {
-            // ...
+
             if (this.props.map !== prevProps.map) {
                 this.renderInfoWindow();
             }
@@ -26565,25 +26556,20 @@ var InfoWindow = function (_React$Component) {
     }, {
         key: 'renderInfoWindow',
         value: function renderInfoWindow() {
-            var _props = this.props,
-                google = _props.google,
-                marker = _props.marker;
-            //
+            var google = this.props.google;
 
             this.infowindow = new google.maps.InfoWindow({
                 content: 'InfoWindow'
             });
-            console.log("render InfoWindow");
         }
     }, {
         key: 'updateContent',
         value: function updateContent() {
+
             if (this.props.map) {
                 var content = this.renderChildren();
                 this.infowindow.setContent(content);
             }
-
-            console.log("Update Content");
         }
     }, {
         key: 'render',

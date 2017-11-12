@@ -22,7 +22,7 @@ export class MapContainer extends React.Component {
             buildings:[
                 {
                     buildingName: "Metropolitan College",
-                    address: "",
+                    address: "755 Commonwealth Avenue, Boston, MA 02215",
                     lat: 42.3504, lng: -71.1076,
                     fountains:[
                         {
@@ -37,7 +37,7 @@ export class MapContainer extends React.Component {
                 },
                 {
                     buildingName: "College of Art and Science",
-                    address: "",
+                    address: "725 Commonwealth Avenue, Boston, MA 02215",
                     lat: 42.3503, lng: -71.1049,
                     fountains:[
                         {
@@ -52,7 +52,7 @@ export class MapContainer extends React.Component {
                 },
                 {
                     buildingName: "College of Communication",
-                    address: "",
+                    address: "640 Commonwealth Avenue, Boston, MA 02215",
                     lat: 42.3489, lng: -71.1025,
                     fountains:[
                         {
@@ -86,20 +86,20 @@ export class MapContainer extends React.Component {
         return(
             <div style={style}>
                 <Map google={this.props.google}>
+
                     <Marker
                         buildings={this.state.buildings}
                         onClick={this.onMarkerClick}
-                        addMarker={this.addMarker}
-                    />
+                        addMarker={this.addMarker}/>
+
                     <InfoWindow
                         {...this.props}
                         marker={this.state.activeMarker}
-                        visible={this.state.showingInfoWindow}
-                    >
-                        <div>
-                            <h4>{this.state.selectedPlace}</h4>
-                        </div>
+                        visible={this.state.showingInfoWindow}>
+
+                        <div><h4>{this.state.selectedPlace}</h4></div>
                     </InfoWindow>
+
                 </Map>
 
             </div>
@@ -108,14 +108,6 @@ export class MapContainer extends React.Component {
     }
 
 }
-
-
-
-
-
-
-
-
 
 export default GoogleApiWrapper({
     apiKey: "AIzaSyBnCsQN7SqbCBzshFOwgxhXN4aa7JHtbA8"

@@ -10,26 +10,25 @@ import ReactDOMServer from 'react-dom/server';
 export default class InfoWindow extends React.Component{
 
     renderChildren() {
+
         const {children} = this.props;
         return ReactDOMServer.renderToString(children);
-        console.log("render children")
     }
 
     openWindow() {
+
         this.infowindow
             .open(this.props.map, this.props.marker);
-
-
-        console.log("open window")
     }
+
     closeWindow() {
-        // this.infowindow.close();
-        console.log("close window!")
+
+        this.infowindow.close();
     }
 
 
     componentDidUpdate(prevProps) {
-        // ...
+
         if (this.props.map !== prevProps.map) {
             this.renderInfoWindow();
         }
@@ -48,24 +47,19 @@ export default class InfoWindow extends React.Component{
 
 
     renderInfoWindow() {
-        let {google,marker} = this.props;
-        //
+
+        let {google} = this.props;
         this.infowindow = new google.maps.InfoWindow({
             content: 'InfoWindow'
         });
-        console.log("render InfoWindow")
-
-
-
     };
 
     updateContent() {
+
         if(this.props.map){
             const content = this.renderChildren();
             this.infowindow.setContent(content);
         }
-
-        console.log("Update Content")
     }
 
 
