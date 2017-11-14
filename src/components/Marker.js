@@ -18,6 +18,25 @@ export default class Marker extends React.Component{
         }
     };
 
+    addressLookup(geocoder,building,func){
+        let result = {
+            lat:undefined,
+            lng:undefined,
+            title: building.buildingName
+        };
+
+        geocoder.geocode({'address':building.address},(results,status)=>{
+            if(status==='OK'){
+                console.log(1);
+                result.lat = results[0].geometry.location.lat();
+                result.lng = results[0].geometry.location.lng();
+            }
+            func(result)
+        });
+
+
+    }
+
     renderMarker() {
         // ...
         let {
@@ -27,43 +46,33 @@ export default class Marker extends React.Component{
         let pos = position || mapCenter;
         position = new google.maps.LatLng(pos.lat, pos.lng);
 
-
         const bldgIcon = {
             url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
             scaledSize: new google.maps.Size(30,30)
         };
 
-        const bldgInfo = [];
-        const bldgPos = buildings.forEach((building) =>{
-            const geocoder = new google.maps.Geocoder();
+        const geocoder = new google.maps.Geocoder();
 
-            return({
-                position:geocoder.geocode({'address': building.address}, (results,status)=>{
-                    if(status==='OK'){
-                        return(results[0].geometry.location)
-                        // const marker = new google.maps.Marker({
-                        //     map: map,
-                        //     icon: bldgIcon,
-                        //     position: results[0].geometry.location,
-                        //     title: building.buildingName
-                        // });
-                        // marker.addListener('clicked', (evt)=>{
-                        //     onClick(marker)
-                        // })
-                    }
-                }),
-                title:building.buildingName
+        this.markers=[];
+
+        const bldgLatLngs = buildings.map((building)=>{
+
+            this.addressLookup(geocoder,building,(result)=>{
+                this.markers.push(new google.maps.Marker({
+                    map:map,
+                    position: new google.maps.LatLng(result.lat,result.lng),
+                    icon:bldgIcon,
+                    title:result.title
+                }));
+
+                this.markers.map((marker)=>{
+                    marker.addListener('click',(evt)=>{
+                        onClick(marker)
+                    })
+                })
             })
         });
 
-        const bldgPref = {
-            map:map,
-            icon:bldgIcon
-        };
-
-        this.bldgMarkers = bldgPos.map((b)=>{
-            return(new google.maps.Marker(Object.assign(bldgPref, b)))
-        });
 
         const locIcon = {
             url: 'http://icons.iconarchive.com/icons/hopstarter/soft-scraps/256/Button-Blank-Blue-icon.png',

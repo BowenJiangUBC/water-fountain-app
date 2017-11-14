@@ -23941,7 +23941,7 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
             selectedPlace: "",
             buildings: [{
                 buildingName: "Metropolitan College",
-                address: "755 Commonwealth Avenue, Boston, MA 02215",
+                address: "755 Commonwealth Avenue, Boston, MA 02215, USA",
                 lat: 42.3504, lng: -71.1076,
                 fountains: [{
                     floor: 1,
@@ -23952,7 +23952,7 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
                 }]
             }, {
                 buildingName: "College of Art and Science",
-                address: "725 Commonwealth Avenue, Boston, MA 02215",
+                address: "725 Commonwealth Avenue, Boston, MA 02215, USA",
                 lat: 42.3503, lng: -71.1049,
                 fountains: [{
                     floor: 1,
@@ -23963,7 +23963,7 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
                 }]
             }, {
                 buildingName: "College of Communication",
-                address: "640 Commonwealth Avenue, Boston, MA 02215",
+                address: "640 Commonwealth Avenue, Boston, MA 02215, USA",
                 lat: 42.3489, lng: -71.1025,
                 fountains: [{
                     floor: 1,
@@ -23980,6 +23980,7 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
     (0, _createClass3.default)(MapContainer, [{
         key: 'onMarkerClick',
         value: function onMarkerClick(marker) {
+            console.log("Marker Clicked!");
             this.setState({
                 activeMarker: marker,
                 selectedPlace: marker.getTitle(),
@@ -24474,14 +24475,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var containerStyles = Object.assign({}, mapStyles.container, this.props.containerStyle);
 
         return _react2.default.createElement(
-          'div',
-          { style: containerStyles, className: this.props.className },
-          _react2.default.createElement(
             'div',
-            { style: style, ref: 'map' },
-            'Loading map...'
-          ),
-          this.renderChildren()
+            { style: containerStyles, className: this.props.className },
+            _react2.default.createElement(
+                'div',
+                { style: style, ref: 'map' },
+                'Loading map...'
+            ),
+            this.renderChildren()
         );
       }
     }]);
@@ -24631,7 +24632,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         options = options || {};
         var apiKey = options.apiKey;
         var libraries = options.libraries || ['places'];
-        var version = options.version || '3.29';
+        var version = options.version || '3.24';
         var language = options.language || 'en';
 
         return (0, _ScriptCache.ScriptCache)({
@@ -25958,9 +25959,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   var wrappedPromise = function wrappedPromise() {
     var wrappedPromise = {},
         promise = new Promise(function (resolve, reject) {
-      wrappedPromise.resolve = resolve;
-      wrappedPromise.reject = reject;
-    });
+          wrappedPromise.resolve = resolve;
+          wrappedPromise.reject = reject;
+        });
     wrappedPromise.then = promise.then.bind(promise);
     wrappedPromise.catch = promise.catch.bind(promise);
     wrappedPromise.promise = promise;
@@ -26387,8 +26388,6 @@ var Marker = function (_React$Component) {
     }, {
         key: 'renderMarker',
         value: function renderMarker() {
-            var _this2 = this;
-
             // ...
             var _props = this.props,
                 map = _props.map,
@@ -26402,30 +26401,33 @@ var Marker = function (_React$Component) {
             var pos = position || mapCenter;
             position = new google.maps.LatLng(pos.lat, pos.lng);
 
-            var bldgPos = buildings.map(function (building) {
-                var geocoder = new google.maps.Geocoder();
-
-                console.log(_this2.geocodeAddress(building, geocoder));
-
-                geocoder.geocode({ 'address': building.address }, function (results, status) {
-                    if (status === 'OK') {
-                        console.log(results[0].geometry.location);
-                        {
-                            position: results[0].geometry.location;
-                        }
-                    }
-                });
-                return {
-                    // position:  new google.maps.LatLng(building.lat,building.lng),
-                    position: _this2.geocodeAddress(building, geocoder),
-                    title: building.buildingName
-                };
-            });
-
             var bldgIcon = {
                 url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
                 scaledSize: new google.maps.Size(30, 30)
             };
+
+            var bldgInfo = [];
+            var bldgPos = buildings.forEach(function (building) {
+                var geocoder = new google.maps.Geocoder();
+
+                return {
+                    position: geocoder.geocode({ 'address': building.address }, function (results, status) {
+                        if (status === 'OK') {
+                            return results[0].geometry.location;
+                            // const marker = new google.maps.Marker({
+                            //     map: map,
+                            //     icon: bldgIcon,
+                            //     position: results[0].geometry.location,
+                            //     title: building.buildingName
+                            // });
+                            // marker.addListener('clicked', (evt)=>{
+                            //     onClick(marker)
+                            // })
+                        }
+                    }),
+                    title: building.buildingName
+                };
+            });
 
             var bldgPref = {
                 map: map,
@@ -26434,12 +26436,6 @@ var Marker = function (_React$Component) {
 
             this.bldgMarkers = bldgPos.map(function (b) {
                 return new google.maps.Marker((0, _assign2.default)(bldgPref, b));
-            });
-
-            this.bldgMarkers.map(function (marker) {
-                marker.addListener('click', function (evt) {
-                    onClick(marker);
-                });
             });
 
             var locIcon = {
@@ -26454,16 +26450,6 @@ var Marker = function (_React$Component) {
                 icon: locIcon
             };
             this.locMarker = new google.maps.Marker(locPref);
-        }
-    }, {
-        key: 'geocodeAddress',
-        value: function geocodeAddress(building, geocoder) {
-            geocoder.geocode({ 'address': building.address }, function (results, status) {
-                if (status === 'OK') {
-                    console.log(results[0].geometry.location);
-                    return results[0].geometry.location;
-                }
-            });
         }
     }, {
         key: 'render',
