@@ -27,7 +27,6 @@ export default class Marker extends React.Component{
 
         geocoder.geocode({'address':building.address},(results,status)=>{
             if(status==='OK'){
-                console.log(1);
                 result.lat = results[0].geometry.location.lat();
                 result.lng = results[0].geometry.location.lng();
             }

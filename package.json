@@ -2,6 +2,10 @@
   "name": "water-fountain-app",
   "version": "1.0.0",
   "description": "An simple webapp for finding all the bottle filling fountain within Boston University area.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BowenJiangUBC/water-fountain-app.git"
+  },
   "scripts": {
     "start": "webpack-dev-server --hot --inline --colors --content-base ./build",
     "build": "webpack --progress --colors"
@@ -9,14 +13,16 @@
   "author": "Bowen Jiang",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
     "google-maps-react": "^1.1.0",
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-hot-loader": "^3.0.0-beta.6",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-logger": "^3.0.6"
+    "react-router": "^4.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -28,6 +34,7 @@
     "babel-preset-stage-2": "^6.24.1",
     "babel-runtime": "^6.26.0",
     "webpack": "^3.8.1",
+    "http-server": "^0.10.0",
     "webpack-dev-server": "^2.9.4"
   }
 }

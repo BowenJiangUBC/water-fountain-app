@@ -70,7 +70,6 @@ export class MapContainer extends React.Component {
     }
 
     onMarkerClick(marker){
-        console.log("Marker Clicked!");
         this.setState({
             activeMarker: marker,
             selectedPlace: marker.getTitle(),
