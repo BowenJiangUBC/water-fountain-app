@@ -28,32 +28,33 @@ export default class Marker extends React.Component{
         position = new google.maps.LatLng(pos.lat, pos.lng);
 
 
-        const bldgPos = buildings.map((building) =>{
-            const geocoder = new google.maps.Geocoder();
-
-            console.log(this.geocodeAddress(building,geocoder));
-
-            geocoder.geocode({'address': building.address}, (results,status)=>{
-                if(status==='OK'){
-                    console.log(results[0].geometry.location);
-                    {
-                        position: results[0].geometry.location
-                    }
-                }
-            });
-            return({
-                // position:  new google.maps.LatLng(building.lat,building.lng),
-                position: this.geocodeAddress(building,geocoder),
-                title: building.buildingName
-            });
-        });
-
-
-
         const bldgIcon = {
             url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
             scaledSize: new google.maps.Size(30,30)
         };
+
+        const bldgInfo = [];
+        const bldgPos = buildings.forEach((building) =>{
+            const geocoder = new google.maps.Geocoder();
+
+            return({
+                position:geocoder.geocode({'address': building.address}, (results,status)=>{
+                    if(status==='OK'){
+                        return(results[0].geometry.location)
+                        // const marker = new google.maps.Marker({
+                        //     map: map,
+                        //     icon: bldgIcon,
+                        //     position: results[0].geometry.location,
+                        //     title: building.buildingName
+                        // });
+                        // marker.addListener('clicked', (evt)=>{
+                        //     onClick(marker)
+                        // })
+                    }
+                }),
+                title:building.buildingName
+            })
+        });
 
         const bldgPref = {
             map:map,
@@ -62,12 +63,6 @@ export default class Marker extends React.Component{
 
         this.bldgMarkers = bldgPos.map((b)=>{
             return(new google.maps.Marker(Object.assign(bldgPref, b)))
-        });
-
-        this.bldgMarkers.map((marker)=>{
-            marker.addListener('click', (evt)=>{
-                onClick(marker)
-            });
         });
 
         const locIcon = {
@@ -86,17 +81,6 @@ export default class Marker extends React.Component{
 
 
     };
-
-    geocodeAddress(building,geocoder){
-        geocoder.geocode({'address': building.address}, (results,status)=>{
-            if(status==='OK'){
-                console.log(results[0].geometry.location);
-                return(
-                    results[0].geometry.location
-                )
-            }
-        })
-    }
 
     render(){
         return null;

@@ -23941,7 +23941,7 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
             selectedPlace: "",
             buildings: [{
                 buildingName: "Metropolitan College",
-                address: "",
+                address: "755 Commonwealth Avenue, Boston, MA 02215",
                 lat: 42.3504, lng: -71.1076,
                 fountains: [{
                     floor: 1,
@@ -23952,7 +23952,7 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
                 }]
             }, {
                 buildingName: "College of Art and Science",
-                address: "",
+                address: "725 Commonwealth Avenue, Boston, MA 02215",
                 lat: 42.3503, lng: -71.1049,
                 fountains: [{
                     floor: 1,
@@ -23963,7 +23963,7 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
                 }]
             }, {
                 buildingName: "College of Communication",
-                address: "",
+                address: "640 Commonwealth Avenue, Boston, MA 02215",
                 lat: 42.3489, lng: -71.1025,
                 fountains: [{
                     floor: 1,
@@ -24474,14 +24474,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         var containerStyles = Object.assign({}, mapStyles.container, this.props.containerStyle);
 
         return _react2.default.createElement(
+          'div',
+          { style: containerStyles, className: this.props.className },
+          _react2.default.createElement(
             'div',
-            { style: containerStyles, className: this.props.className },
-            _react2.default.createElement(
-                'div',
-                { style: style, ref: 'map' },
-                'Loading map...'
-            ),
-            this.renderChildren()
+            { style: style, ref: 'map' },
+            'Loading map...'
+          ),
+          this.renderChildren()
         );
       }
     }]);
@@ -24631,7 +24631,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         options = options || {};
         var apiKey = options.apiKey;
         var libraries = options.libraries || ['places'];
-        var version = options.version || '3.24';
+        var version = options.version || '3.29';
         var language = options.language || 'en';
 
         return (0, _ScriptCache.ScriptCache)({
@@ -25958,9 +25958,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
   var wrappedPromise = function wrappedPromise() {
     var wrappedPromise = {},
         promise = new Promise(function (resolve, reject) {
-          wrappedPromise.resolve = resolve;
-          wrappedPromise.reject = reject;
-        });
+      wrappedPromise.resolve = resolve;
+      wrappedPromise.reject = reject;
+    });
     wrappedPromise.then = promise.then.bind(promise);
     wrappedPromise.catch = promise.catch.bind(promise);
     wrappedPromise.promise = promise;
@@ -26373,11 +26373,7 @@ var Marker = function (_React$Component) {
 
     function Marker(props) {
         (0, _classCallCheck3.default)(this, Marker);
-
-        var _this = (0, _possibleConstructorReturn3.default)(this, (Marker.__proto__ || (0, _getPrototypeOf2.default)(Marker)).call(this, props));
-
-        var onClick = _this.props.onClick;
-        return _this;
+        return (0, _possibleConstructorReturn3.default)(this, (Marker.__proto__ || (0, _getPrototypeOf2.default)(Marker)).call(this, props));
     }
 
     (0, _createClass3.default)(Marker, [{
@@ -26399,15 +26395,29 @@ var Marker = function (_React$Component) {
                 google = _props.google,
                 position = _props.position,
                 mapCenter = _props.mapCenter,
-                buildings = _props.buildings;
+                buildings = _props.buildings,
+                onClick = _props.onClick;
 
 
             var pos = position || mapCenter;
             position = new google.maps.LatLng(pos.lat, pos.lng);
 
             var bldgPos = buildings.map(function (building) {
+                var geocoder = new google.maps.Geocoder();
+
+                console.log(_this2.geocodeAddress(building, geocoder));
+
+                geocoder.geocode({ 'address': building.address }, function (results, status) {
+                    if (status === 'OK') {
+                        console.log(results[0].geometry.location);
+                        {
+                            position: results[0].geometry.location;
+                        }
+                    }
+                });
                 return {
-                    position: new google.maps.LatLng(building.lat, building.lng),
+                    // position:  new google.maps.LatLng(building.lat,building.lng),
+                    position: _this2.geocodeAddress(building, geocoder),
                     title: building.buildingName
                 };
             });
@@ -26428,7 +26438,7 @@ var Marker = function (_React$Component) {
 
             this.bldgMarkers.map(function (marker) {
                 marker.addListener('click', function (evt) {
-                    _this2.props.onClick(marker);
+                    onClick(marker);
                 });
             });
 
@@ -26444,6 +26454,16 @@ var Marker = function (_React$Component) {
                 icon: locIcon
             };
             this.locMarker = new google.maps.Marker(locPref);
+        }
+    }, {
+        key: 'geocodeAddress',
+        value: function geocodeAddress(building, geocoder) {
+            geocoder.geocode({ 'address': building.address }, function (results, status) {
+                if (status === 'OK') {
+                    console.log(results[0].geometry.location);
+                    return results[0].geometry.location;
+                }
+            });
         }
     }, {
         key: 'render',

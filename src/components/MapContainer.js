@@ -22,7 +22,7 @@ export class MapContainer extends React.Component {
             buildings:[
                 {
                     buildingName: "Metropolitan College",
-                    address: "755 Commonwealth Avenue, Boston, MA 02215",
+                    address: "755 Commonwealth Avenue, Boston, MA 02215, USA",
                     lat: 42.3504, lng: -71.1076,
                     fountains:[
                         {
@@ -37,7 +37,7 @@ export class MapContainer extends React.Component {
                 },
                 {
                     buildingName: "College of Art and Science",
-                    address: "725 Commonwealth Avenue, Boston, MA 02215",
+                    address: "725 Commonwealth Avenue, Boston, MA 02215, USA",
                     lat: 42.3503, lng: -71.1049,
                     fountains:[
                         {
@@ -52,7 +52,7 @@ export class MapContainer extends React.Component {
                 },
                 {
                     buildingName: "College of Communication",
-                    address: "640 Commonwealth Avenue, Boston, MA 02215",
+                    address: "640 Commonwealth Avenue, Boston, MA 02215, USA",
                     lat: 42.3489, lng: -71.1025,
                     fountains:[
                         {
@@ -70,6 +70,7 @@ export class MapContainer extends React.Component {
     }
 
     onMarkerClick(marker){
+        console.log("Marker Clicked!");
         this.setState({
             activeMarker: marker,
             selectedPlace: marker.getTitle(),
