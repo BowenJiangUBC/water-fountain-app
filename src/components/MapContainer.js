@@ -7,6 +7,7 @@ import Map from './Map';
 import Marker from './Marker';
 import InfoWindow from './InfoWindow';
 
+
 export class MapContainer extends React.Component {
 
     constructor(props) {
@@ -18,54 +19,7 @@ export class MapContainer extends React.Component {
         this.state = {
             showingInfoWindow: false,
             activeMarker: {},
-            selectedPlace: "",
-            buildings:[
-                {
-                    buildingName: "Metropolitan College",
-                    address: "755 Commonwealth Avenue, Boston, MA 02215, USA",
-                    lat: 42.3504, lng: -71.1076,
-                    fountains:[
-                        {
-                            floor:1,
-                            description: "Next to room 1xx"
-                        },
-                        {
-                            floor: 3,
-                            description: "Next to room 3xx"
-                        }
-                    ]
-                },
-                {
-                    buildingName: "College of Art and Science",
-                    address: "725 Commonwealth Avenue, Boston, MA 02215, USA",
-                    lat: 42.3503, lng: -71.1049,
-                    fountains:[
-                        {
-                            floor:1,
-                            description: "Next to room 1xx"
-                        },
-                        {
-                            floor: 3,
-                            description: "Next to room 3xx"
-                        }
-                    ]
-                },
-                {
-                    buildingName: "College of Communication",
-                    address: "640 Commonwealth Avenue, Boston, MA 02215, USA",
-                    lat: 42.3489, lng: -71.1025,
-                    fountains:[
-                        {
-                            floor:1,
-                            description: "Next to room 1xx"
-                        },
-                        {
-                            floor: 3,
-                            description: "Next to room 3xx"
-                        }
-                    ]
-                }
-            ]
+            selectedPlace: ""
         }
     }
 
@@ -88,7 +42,7 @@ export class MapContainer extends React.Component {
                 <Map google={this.props.google}>
 
                     <Marker
-                        buildings={this.state.buildings}
+                        buildings={this.props.buildings}
                         onClick={this.onMarkerClick}
                         addMarker={this.addMarker}/>
 

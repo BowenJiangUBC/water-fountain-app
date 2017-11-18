@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MapContainer from './components/MapContainer'
+import MapContainer from './components/MapContainer';
+import data from '../data/data.json';
+
 
 class App extends React.Component{
 
@@ -8,7 +10,9 @@ class App extends React.Component{
 	render(){
 		return(
 			<div>
-				<MapContainer />
+				<MapContainer
+					buildings={data}
+				/>
 			</div>
 			)
 	}
