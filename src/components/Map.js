@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -116,10 +116,10 @@ export default class Map extends React.Component{
 }
 
 Map.propTypes = {
-    google: React.PropTypes.object,
-    zoom: React.PropTypes.number,
-    initialCenter: React.PropTypes.object,
-    centerAroundCurrentLocation: React.PropTypes.bool
+    google: PropTypes.object,
+    zoom: PropTypes.number,
+    initialCenter: PropTypes.object,
+    centerAroundCurrentLocation: PropTypes.bool
 };
 
 Map.defaultProps = {

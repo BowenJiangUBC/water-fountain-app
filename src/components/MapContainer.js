@@ -19,15 +19,21 @@ export class MapContainer extends React.Component {
         this.state = {
             showingInfoWindow: false,
             activeMarker: {},
-            selectedPlace: ""
+            selectedBuilding:"",
+            fountainNumber:0,
+            address:"",
+            distance: ""
         }
     }
 
     onMarkerClick(marker){
         this.setState({
             activeMarker: marker,
-            selectedPlace: marker.getTitle(),
-            showingInfoWindow: true
+            showingInfoWindow:true,
+            selectedBuilding:marker.building,
+            fountainNumber:marker.count,
+            address:marker.address,
+            distance:marker.distance
         });
     };
 
@@ -51,7 +57,20 @@ export class MapContainer extends React.Component {
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}>
 
-                        <div><h4>{this.state.selectedPlace}</h4></div>
+                        <div>
+                            <h4>{this.state.selectedBuilding} {this.state.distance}</h4>
+                            <p>
+                                {this.state.address}
+                            </p>
+                            <strong>
+                                {this.state.fountainNumber>1
+                                    ? this.state.fountainNumber + ' fountains '
+                                    : this.state.fountainNumber + ' fountain '}
+                                found inside this building.
+                            </strong>
+                        </div>
+
+
                     </InfoWindow>
 
                 </Map>

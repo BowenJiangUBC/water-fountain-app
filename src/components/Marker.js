@@ -2,6 +2,7 @@
  * Created by bowenjiang on 11/1/17.
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class Marker extends React.Component{
 
@@ -18,22 +19,38 @@ export default class Marker extends React.Component{
         }
     };
 
-    addressLookup(geocoder,building,func){
-        let result = {
-            lat:undefined,
-            lng:undefined,
-            title: building.buildingName
-        };
+    // addressLookup(geocoder,map,building,position, onClick, func){
+    //     let latLng = {
+    //         lat:undefined,
+    //         lng:undefined,
+    //     };
+    //
+    //     geocoder.geocode({'address':'685 Commonwealth Avenue,' + ' Boston MA, USA'},(results,status)=>{
+    //         if(status==='OK'){
+    //             latLng.lat = results[0].geometry.location.lat();
+    //             latLng.lng = results[0].geometry.location.lng();
+    //         } else if(status === 'OVER_QUERY_LIMIT') {
+    //
+    //         }
+    //         console.log(status, building.buildingName,latLng);
+    //         func(latLng)
+    //     });
+    // }
 
-        geocoder.geocode({'address':building.address},(results,status)=>{
-            if(status==='OK'){
-                result.lat = results[0].geometry.location.lat();
-                result.lng = results[0].geometry.location.lng();
-            }
-            func(result)
+
+    distanceLookup(google, origin, dest, func){
+        const service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix({
+                origins: [origin],
+                destinations: [dest],
+                travelMode: 'WALKING'
+            }, (response,status)=>{
+                if (status === 'OK') {
+                    const dist = response.rows[0].elements[0].distance.text;
+                    func(dist)
+                }
+
         });
-
-
     }
 
     renderMarker() {
@@ -50,28 +67,29 @@ export default class Marker extends React.Component{
             scaledSize: new google.maps.Size(30,30)
         };
 
-        const geocoder = new google.maps.Geocoder();
+        buildings.map((building)=>{
+            let dest = {
+                lat:building.lat,
+                lng:building.lng
+            };
 
-        this.markers=[];
-
-        const bldgLatLngs = buildings.map((building)=>{
-
-            this.addressLookup(geocoder,building,(result)=>{
-                this.markers.push(new google.maps.Marker({
+            this.distanceLookup(google,position,dest,(dist)=>{
+                let marker = new google.maps.Marker({
                     map:map,
-                    position: new google.maps.LatLng(result.lat,result.lng),
+                    position: new google.maps.LatLng(building.lat,building.lng),
                     icon:bldgIcon,
-                    title:result.title
-                }));
+                    building: building.buildingName,
+                    count: building.fountains.length,
+                    address: building.address,
+                    distance: dist
+                });
 
-                this.markers.map((marker)=>{
-                    marker.addListener('click',(evt)=>{
-                        onClick(marker)
-                    })
-                })
+                marker.addListener('click',(evt)=>{
+                    onClick(marker)
+                });
             })
-        });
 
+        });
 
         const locIcon = {
             url: 'http://icons.iconarchive.com/icons/hopstarter/soft-scraps/256/Button-Blank-Blue-icon.png',
@@ -85,7 +103,7 @@ export default class Marker extends React.Component{
             position: position,
             icon: locIcon
         };
-        this.locMarker = new google.maps.Marker(locPref);
+        new google.maps.Marker(locPref);
 
 
     };
@@ -98,6 +116,6 @@ export default class Marker extends React.Component{
 
 
 Marker.propTypes={
-    position: React.PropTypes.object,
-    map: React.PropTypes.object,
+    position: PropTypes.object,
+    map: PropTypes.object,
 };
