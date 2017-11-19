@@ -328,7 +328,7 @@ module.exports = invariant;
 
 
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 
 /**
  * Similar to invariant but only logs a warning if the condition is not met.
@@ -775,7 +775,7 @@ module.exports = ExecutionEnvironment;
 
 
 
-var _prodInvariant = __webpack_require__(30);
+var _prodInvariant = __webpack_require__(35);
 
 var ReactCurrentOwner = __webpack_require__(12);
 
@@ -1177,6 +1177,16 @@ module.exports = { debugTool: debugTool };
 "use strict";
 
 
+module.exports = __webpack_require__(21);
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -1211,16 +1221,6 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-module.exports = __webpack_require__(21);
-
 
 /***/ }),
 /* 11 */
@@ -1536,7 +1536,7 @@ var _assign = __webpack_require__(4);
 
 var PooledClass = __webpack_require__(23);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var warning = __webpack_require__(2);
 
 var didWarnForAddedNewProperty = false;
@@ -2034,7 +2034,7 @@ module.exports = function (it, key) {
 var global = __webpack_require__(15);
 var core = __webpack_require__(13);
 var ctx = __webpack_require__(91);
-var hide = __webpack_require__(26);
+var hide = __webpack_require__(27);
 var PROTOTYPE = 'prototype';
 
 var $export = function (type, name, source) {
@@ -2098,7 +2098,7 @@ module.exports = $export;
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var anObject = __webpack_require__(33);
+var anObject = __webpack_require__(37);
 var IE8_DOM_DEFINE = __webpack_require__(92);
 var toPrimitive = __webpack_require__(61);
 var dP = Object.defineProperty;
@@ -2121,7 +2121,7 @@ exports.f = __webpack_require__(20) ? Object.defineProperty : function definePro
 /***/ (function(module, exports, __webpack_require__) {
 
 // Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(27)(function () {
+module.exports = !__webpack_require__(28)(function () {
   return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
 });
 
@@ -2932,6 +2932,12 @@ if (process.env.NODE_ENV !== 'production') {
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = { "default": __webpack_require__(143), __esModule: true };
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var dP = __webpack_require__(19);
 var createDesc = __webpack_require__(46);
 module.exports = __webpack_require__(20) ? function (object, key, value) {
@@ -2943,7 +2949,7 @@ module.exports = __webpack_require__(20) ? function (object, key, value) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports) {
 
 module.exports = function (exec) {
@@ -2956,7 +2962,78 @@ module.exports = function (exec) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+exports.default = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _defineProperty = __webpack_require__(147);
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      (0, _defineProperty2.default)(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof2 = __webpack_require__(94);
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
+};
+
+/***/ }),
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
@@ -2968,7 +3045,7 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 29 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var store = __webpack_require__(60)('wks');
@@ -2985,7 +3062,46 @@ $exports.store = store;
 
 
 /***/ }),
-/* 30 */
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _setPrototypeOf = __webpack_require__(174);
+
+var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
+
+var _create = __webpack_require__(178);
+
+var _create2 = _interopRequireDefault(_create);
+
+var _typeof2 = __webpack_require__(94);
+
+var _typeof3 = _interopRequireDefault(_typeof2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
+  }
+
+  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+/***/ }),
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3027,7 +3143,7 @@ function reactProdInvariant(code) {
 module.exports = reactProdInvariant;
 
 /***/ }),
-/* 31 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3148,16 +3264,10 @@ DOMLazyTree.queueText = queueText;
 module.exports = DOMLazyTree;
 
 /***/ }),
-/* 32 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = { "default": __webpack_require__(143), __esModule: true };
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(34);
+var isObject = __webpack_require__(38);
 module.exports = function (it) {
   if (!isObject(it)) throw TypeError(it + ' is not an object!');
   return it;
@@ -3165,123 +3275,13 @@ module.exports = function (it) {
 
 
 /***/ }),
-/* 34 */
+/* 38 */
 /***/ (function(module, exports) {
 
 module.exports = function (it) {
   return typeof it === 'object' ? it !== null : typeof it === 'function';
 };
 
-
-/***/ }),
-/* 35 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-exports.default = function (instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-};
-
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _defineProperty = __webpack_require__(147);
-
-var _defineProperty2 = _interopRequireDefault(_defineProperty);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function () {
-  function defineProperties(target, props) {
-    for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      (0, _defineProperty2.default)(target, descriptor.key, descriptor);
-    }
-  }
-
-  return function (Constructor, protoProps, staticProps) {
-    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-    if (staticProps) defineProperties(Constructor, staticProps);
-    return Constructor;
-  };
-}();
-
-/***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof2 = __webpack_require__(94);
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (self, call) {
-  if (!self) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return call && ((typeof call === "undefined" ? "undefined" : (0, _typeof3.default)(call)) === "object" || typeof call === "function") ? call : self;
-};
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _setPrototypeOf = __webpack_require__(174);
-
-var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
-
-var _create = __webpack_require__(178);
-
-var _create2 = _interopRequireDefault(_create);
-
-var _typeof2 = __webpack_require__(94);
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = function (subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === "undefined" ? "undefined" : (0, _typeof3.default)(superClass)));
-  }
-
-  subClass.prototype = (0, _create2.default)(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      enumerable: false,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf2.default ? (0, _setPrototypeOf2.default)(subClass, superClass) : subClass.__proto__ = superClass;
-};
 
 /***/ }),
 /* 39 */
@@ -5118,7 +5118,7 @@ module.exports = function (key) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(34);
+var isObject = __webpack_require__(38);
 // instead of the ES6 spec version, we didn't implement @@toPrimitive case
 // and the second argument - flag - preferred type is a string
 module.exports = function (it, S) {
@@ -5162,7 +5162,7 @@ module.exports = {};
 /***/ (function(module, exports, __webpack_require__) {
 
 // 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject = __webpack_require__(33);
+var anObject = __webpack_require__(37);
 var dPs = __webpack_require__(155);
 var enumBugKeys = __webpack_require__(66);
 var IE_PROTO = __webpack_require__(59)('IE_PROTO');
@@ -5220,7 +5220,7 @@ module.exports = (
 
 var def = __webpack_require__(19).f;
 var has = __webpack_require__(17);
-var TAG = __webpack_require__(29)('toStringTag');
+var TAG = __webpack_require__(33)('toStringTag');
 
 module.exports = function (it, tag, stat) {
   if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -5231,7 +5231,7 @@ module.exports = function (it, tag, stat) {
 /* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports.f = __webpack_require__(29);
+exports.f = __webpack_require__(33);
 
 
 /***/ }),
@@ -5818,7 +5818,7 @@ module.exports = getEventModifierState;
 
 
 
-var DOMLazyTree = __webpack_require__(31);
+var DOMLazyTree = __webpack_require__(36);
 var Danger = __webpack_require__(213);
 var ReactDOMComponentTree = __webpack_require__(5);
 var ReactInstrumentation = __webpack_require__(8);
@@ -6847,7 +6847,7 @@ module.exports = ReactUpdateQueue;
 
 var _assign = __webpack_require__(4);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var warning = __webpack_require__(2);
 
 var validateDOMNesting = emptyFunction;
@@ -7307,7 +7307,7 @@ module.exports = function (fn, that, length) {
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = !__webpack_require__(20) && !__webpack_require__(27)(function () {
+module.exports = !__webpack_require__(20) && !__webpack_require__(28)(function () {
   return Object.defineProperty(__webpack_require__(93)('div'), 'a', { get: function () { return 7; } }).a != 7;
 });
 
@@ -7316,7 +7316,7 @@ module.exports = !__webpack_require__(20) && !__webpack_require__(27)(function (
 /* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var isObject = __webpack_require__(34);
+var isObject = __webpack_require__(38);
 var document = __webpack_require__(15).document;
 // typeof document.createElement is 'object' in old IE
 var is = isObject(document) && isObject(document.createElement);
@@ -7361,13 +7361,13 @@ exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.d
 var LIBRARY = __webpack_require__(63);
 var $export = __webpack_require__(18);
 var redefine = __webpack_require__(96);
-var hide = __webpack_require__(26);
+var hide = __webpack_require__(27);
 var has = __webpack_require__(17);
 var Iterators = __webpack_require__(64);
 var $iterCreate = __webpack_require__(154);
 var setToStringTag = __webpack_require__(67);
 var getPrototypeOf = __webpack_require__(90);
-var ITERATOR = __webpack_require__(29)('iterator');
+var ITERATOR = __webpack_require__(33)('iterator');
 var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 var FF_ITERATOR = '@@iterator';
 var KEYS = 'keys';
@@ -7433,7 +7433,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
 /* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(26);
+module.exports = __webpack_require__(27);
 
 
 /***/ }),
@@ -7441,7 +7441,7 @@ module.exports = __webpack_require__(26);
 /***/ (function(module, exports, __webpack_require__) {
 
 var has = __webpack_require__(17);
-var toIObject = __webpack_require__(28);
+var toIObject = __webpack_require__(32);
 var arrayIndexOf = __webpack_require__(156)(false);
 var IE_PROTO = __webpack_require__(59)('IE_PROTO');
 
@@ -7501,7 +7501,7 @@ exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 
 var pIE = __webpack_require__(48);
 var createDesc = __webpack_require__(46);
-var toIObject = __webpack_require__(28);
+var toIObject = __webpack_require__(32);
 var toPrimitive = __webpack_require__(61);
 var has = __webpack_require__(17);
 var IE8_DOM_DEFINE = __webpack_require__(92);
@@ -7532,7 +7532,7 @@ exports.f = __webpack_require__(20) ? gOPD : function getOwnPropertyDescriptor(O
 
 
 
-var _prodInvariant = __webpack_require__(30),
+var _prodInvariant = __webpack_require__(35),
     _assign = __webpack_require__(4);
 
 var ReactNoopUpdateQueue = __webpack_require__(103);
@@ -8129,7 +8129,7 @@ module.exports = function(isValidElement) {
 
 
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var invariant = __webpack_require__(1);
 var warning = __webpack_require__(2);
 var assign = __webpack_require__(4);
@@ -10412,7 +10412,7 @@ var _assign = __webpack_require__(4);
 var ReactUpdates = __webpack_require__(11);
 var Transaction = __webpack_require__(51);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 
 var RESET_BATCHED_UPDATES = {
   initialize: emptyFunction,
@@ -10479,7 +10479,7 @@ module.exports = ReactDefaultBatchingStrategy;
  * @typechecks
  */
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 
 /**
  * Upstream version of event listener. Does not take into account specific
@@ -10729,7 +10729,7 @@ module.exports = getActiveElement;
 
 var _prodInvariant = __webpack_require__(3);
 
-var DOMLazyTree = __webpack_require__(31);
+var DOMLazyTree = __webpack_require__(36);
 var DOMProperty = __webpack_require__(16);
 var React = __webpack_require__(21);
 var ReactBrowserEventEmitter = __webpack_require__(55);
@@ -11476,27 +11476,27 @@ module.exports = __webpack_require__(288);
 "use strict";
 
 
-var _getPrototypeOf = __webpack_require__(32);
+var _getPrototypeOf = __webpack_require__(26);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = __webpack_require__(35);
+var _classCallCheck2 = __webpack_require__(29);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(36);
+var _createClass2 = __webpack_require__(30);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(37);
+var _possibleConstructorReturn2 = __webpack_require__(31);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(38);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(10);
+var _react = __webpack_require__(9);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -11511,6 +11511,10 @@ var _MapContainer2 = _interopRequireDefault(_MapContainer);
 var _data = __webpack_require__(297);
 
 var _data2 = _interopRequireDefault(_data);
+
+var _Sidebar = __webpack_require__(298);
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -11527,8 +11531,12 @@ var App = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ 'class': 'wrapper' },
+				_react2.default.createElement(_Sidebar2.default, {
+					buildings: _data2.default
+				}),
 				_react2.default.createElement(_MapContainer2.default, {
+					id: 'mapContainer',
 					buildings: _data2.default
 				})
 			);
@@ -11569,7 +11577,7 @@ __webpack_require__(145)('getPrototypeOf', function () {
 // most Object methods by ES6 should accept primitives
 var $export = __webpack_require__(18);
 var core = __webpack_require__(13);
-var fails = __webpack_require__(27);
+var fails = __webpack_require__(28);
 module.exports = function (KEY, exec) {
   var fn = (core.Object || {})[KEY] || Object[KEY];
   var exp = {};
@@ -11688,7 +11696,7 @@ var setToStringTag = __webpack_require__(67);
 var IteratorPrototype = {};
 
 // 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(26)(IteratorPrototype, __webpack_require__(29)('iterator'), function () { return this; });
+__webpack_require__(27)(IteratorPrototype, __webpack_require__(33)('iterator'), function () { return this; });
 
 module.exports = function (Constructor, NAME, next) {
   Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -11701,7 +11709,7 @@ module.exports = function (Constructor, NAME, next) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var dP = __webpack_require__(19);
-var anObject = __webpack_require__(33);
+var anObject = __webpack_require__(37);
 var getKeys = __webpack_require__(47);
 
 module.exports = __webpack_require__(20) ? Object.defineProperties : function defineProperties(O, Properties) {
@@ -11721,7 +11729,7 @@ module.exports = __webpack_require__(20) ? Object.defineProperties : function de
 
 // false -> Array#indexOf
 // true  -> Array#includes
-var toIObject = __webpack_require__(28);
+var toIObject = __webpack_require__(32);
 var toLength = __webpack_require__(157);
 var toAbsoluteIndex = __webpack_require__(158);
 module.exports = function (IS_INCLUDES) {
@@ -11783,9 +11791,9 @@ module.exports = document && document.documentElement;
 
 __webpack_require__(161);
 var global = __webpack_require__(15);
-var hide = __webpack_require__(26);
+var hide = __webpack_require__(27);
 var Iterators = __webpack_require__(64);
-var TO_STRING_TAG = __webpack_require__(29)('toStringTag');
+var TO_STRING_TAG = __webpack_require__(33)('toStringTag');
 
 var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
   'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -11811,7 +11819,7 @@ for (var i = 0; i < DOMIterables.length; i++) {
 var addToUnscopables = __webpack_require__(162);
 var step = __webpack_require__(163);
 var Iterators = __webpack_require__(64);
-var toIObject = __webpack_require__(28);
+var toIObject = __webpack_require__(32);
 
 // 22.1.3.4 Array.prototype.entries()
 // 22.1.3.13 Array.prototype.keys()
@@ -11889,17 +11897,17 @@ var DESCRIPTORS = __webpack_require__(20);
 var $export = __webpack_require__(18);
 var redefine = __webpack_require__(96);
 var META = __webpack_require__(167).KEY;
-var $fails = __webpack_require__(27);
+var $fails = __webpack_require__(28);
 var shared = __webpack_require__(60);
 var setToStringTag = __webpack_require__(67);
 var uid = __webpack_require__(45);
-var wks = __webpack_require__(29);
+var wks = __webpack_require__(33);
 var wksExt = __webpack_require__(68);
 var wksDefine = __webpack_require__(69);
 var enumKeys = __webpack_require__(168);
 var isArray = __webpack_require__(169);
-var anObject = __webpack_require__(33);
-var toIObject = __webpack_require__(28);
+var anObject = __webpack_require__(37);
+var toIObject = __webpack_require__(32);
 var toPrimitive = __webpack_require__(61);
 var createDesc = __webpack_require__(46);
 var _create = __webpack_require__(65);
@@ -12108,7 +12116,7 @@ $JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
 });
 
 // 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(26)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(27)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 // 19.4.3.5 Symbol.prototype[@@toStringTag]
 setToStringTag($Symbol, 'Symbol');
 // 20.2.1.9 Math[@@toStringTag]
@@ -12122,14 +12130,14 @@ setToStringTag(global.JSON, 'JSON', true);
 /***/ (function(module, exports, __webpack_require__) {
 
 var META = __webpack_require__(45)('meta');
-var isObject = __webpack_require__(34);
+var isObject = __webpack_require__(38);
 var has = __webpack_require__(17);
 var setDesc = __webpack_require__(19).f;
 var id = 0;
 var isExtensible = Object.isExtensible || function () {
   return true;
 };
-var FREEZE = !__webpack_require__(27)(function () {
+var FREEZE = !__webpack_require__(28)(function () {
   return isExtensible(Object.preventExtensions({}));
 });
 var setMeta = function (it) {
@@ -12213,7 +12221,7 @@ module.exports = Array.isArray || function isArray(arg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(28);
+var toIObject = __webpack_require__(32);
 var gOPN = __webpack_require__(100).f;
 var toString = {}.toString;
 
@@ -12282,8 +12290,8 @@ $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(177).set });
 
 // Works with __proto__ only. Old v8 can't work with null proto objects.
 /* eslint-disable no-proto */
-var isObject = __webpack_require__(34);
-var anObject = __webpack_require__(33);
+var isObject = __webpack_require__(38);
+var anObject = __webpack_require__(37);
 var check = function (O, proto) {
   anObject(O);
   if (!isObject(proto) && proto !== null) throw TypeError(proto + ": can't set as prototype!");
@@ -12351,7 +12359,7 @@ $export($export.S, 'Object', { create: __webpack_require__(65) });
 var PooledClass = __webpack_require__(182);
 var ReactElement = __webpack_require__(22);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var traverseAllChildren = __webpack_require__(183);
 
 var twoArgumentPooler = PooledClass.twoArgumentPooler;
@@ -12543,7 +12551,7 @@ module.exports = ReactChildren;
 
 
 
-var _prodInvariant = __webpack_require__(30);
+var _prodInvariant = __webpack_require__(35);
 
 var invariant = __webpack_require__(1);
 
@@ -12658,7 +12666,7 @@ module.exports = PooledClass;
 
 
 
-var _prodInvariant = __webpack_require__(30);
+var _prodInvariant = __webpack_require__(35);
 
 var ReactCurrentOwner = __webpack_require__(12);
 var REACT_ELEMENT_TYPE = __webpack_require__(104);
@@ -13073,7 +13081,7 @@ module.exports = ReactDOMFactories;
 
 
 
-var _prodInvariant = __webpack_require__(30);
+var _prodInvariant = __webpack_require__(35);
 
 var ReactPropTypeLocationNames = __webpack_require__(187);
 var ReactPropTypesSecret = __webpack_require__(188);
@@ -14222,7 +14230,7 @@ module.exports = factory;
  */
 
 
-var _prodInvariant = __webpack_require__(30);
+var _prodInvariant = __webpack_require__(35);
 
 var ReactElement = __webpack_require__(22);
 
@@ -16434,11 +16442,11 @@ module.exports = ReactComponentBrowserEnvironment;
 
 var _prodInvariant = __webpack_require__(3);
 
-var DOMLazyTree = __webpack_require__(31);
+var DOMLazyTree = __webpack_require__(36);
 var ExecutionEnvironment = __webpack_require__(6);
 
 var createNodesFromMarkup = __webpack_require__(214);
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var invariant = __webpack_require__(1);
 
 var Danger = {
@@ -16843,7 +16851,7 @@ var _prodInvariant = __webpack_require__(3),
 
 var AutoFocusUtils = __webpack_require__(219);
 var CSSPropertyOperations = __webpack_require__(220);
-var DOMLazyTree = __webpack_require__(31);
+var DOMLazyTree = __webpack_require__(36);
 var DOMNamespaces = __webpack_require__(79);
 var DOMProperty = __webpack_require__(16);
 var DOMPropertyOperations = __webpack_require__(122);
@@ -16860,7 +16868,7 @@ var ReactInstrumentation = __webpack_require__(8);
 var ReactMultiChild = __webpack_require__(233);
 var ReactServerRenderingTransaction = __webpack_require__(129);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var escapeTextContentForBrowser = __webpack_require__(54);
 var invariant = __webpack_require__(1);
 var isEventSupported = __webpack_require__(76);
@@ -19131,7 +19139,7 @@ var ReactCurrentOwner = __webpack_require__(12);
 var ReactReconciler = __webpack_require__(24);
 var ReactChildReconciler = __webpack_require__(234);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var flattenChildren = __webpack_require__(241);
 var invariant = __webpack_require__(1);
 
@@ -21068,7 +21076,7 @@ module.exports = ReactServerUpdateQueue;
 
 var _assign = __webpack_require__(4);
 
-var DOMLazyTree = __webpack_require__(31);
+var DOMLazyTree = __webpack_require__(36);
 var ReactDOMComponentTree = __webpack_require__(5);
 
 var ReactDOMEmptyComponent = function (instantiate) {
@@ -21273,7 +21281,7 @@ var _prodInvariant = __webpack_require__(3),
     _assign = __webpack_require__(4);
 
 var DOMChildrenOperations = __webpack_require__(78);
-var DOMLazyTree = __webpack_require__(31);
+var DOMLazyTree = __webpack_require__(36);
 var ReactDOMComponentTree = __webpack_require__(5);
 
 var escapeTextContentForBrowser = __webpack_require__(54);
@@ -22759,7 +22767,7 @@ var SyntheticTransitionEvent = __webpack_require__(265);
 var SyntheticUIEvent = __webpack_require__(43);
 var SyntheticWheelEvent = __webpack_require__(266);
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var getEventCharCode = __webpack_require__(89);
 var invariant = __webpack_require__(1);
 
@@ -23891,27 +23899,27 @@ var _extends2 = __webpack_require__(275);
 
 var _extends3 = _interopRequireDefault(_extends2);
 
-var _getPrototypeOf = __webpack_require__(32);
+var _getPrototypeOf = __webpack_require__(26);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = __webpack_require__(35);
+var _classCallCheck2 = __webpack_require__(29);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(36);
+var _createClass2 = __webpack_require__(30);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(37);
+var _possibleConstructorReturn2 = __webpack_require__(31);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(38);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(10);
+var _react = __webpack_require__(9);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -24086,7 +24094,7 @@ var IObject = __webpack_require__(98);
 var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
-module.exports = !$assign || __webpack_require__(27)(function () {
+module.exports = !$assign || __webpack_require__(28)(function () {
   var A = {};
   var B = {};
   // eslint-disable-next-line no-undef
@@ -24118,7 +24126,7 @@ module.exports = !$assign || __webpack_require__(27)(function () {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(280), __webpack_require__(285), __webpack_require__(287), __webpack_require__(291), __webpack_require__(292), __webpack_require__(10), __webpack_require__(25), __webpack_require__(40), __webpack_require__(56), __webpack_require__(293), __webpack_require__(140)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(280), __webpack_require__(285), __webpack_require__(287), __webpack_require__(291), __webpack_require__(292), __webpack_require__(9), __webpack_require__(25), __webpack_require__(40), __webpack_require__(56), __webpack_require__(293), __webpack_require__(140)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -24536,7 +24544,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
     if (true) {
-        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(40), __webpack_require__(281), __webpack_require__(284)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(9), __webpack_require__(40), __webpack_require__(281), __webpack_require__(284)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -24992,7 +25000,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(25), __webpack_require__(56)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(9), __webpack_require__(25), __webpack_require__(56)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -25215,7 +25223,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 
 
-var emptyFunction = __webpack_require__(9);
+var emptyFunction = __webpack_require__(10);
 var invariant = __webpack_require__(1);
 var ReactPropTypesSecret = __webpack_require__(72);
 
@@ -25272,7 +25280,7 @@ module.exports = function() {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(25), __webpack_require__(40), __webpack_require__(141)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(9), __webpack_require__(25), __webpack_require__(40), __webpack_require__(141)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -25646,7 +25654,7 @@ module.exports = ReactServerBatchingStrategy;
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(25), __webpack_require__(56)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(9), __webpack_require__(25), __webpack_require__(56)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -25865,7 +25873,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
   if (true) {
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(10), __webpack_require__(25), __webpack_require__(56)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [exports, __webpack_require__(9), __webpack_require__(25), __webpack_require__(56)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
@@ -26139,27 +26147,27 @@ var _assign = __webpack_require__(139);
 
 var _assign2 = _interopRequireDefault(_assign);
 
-var _getPrototypeOf = __webpack_require__(32);
+var _getPrototypeOf = __webpack_require__(26);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = __webpack_require__(35);
+var _classCallCheck2 = __webpack_require__(29);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(36);
+var _createClass2 = __webpack_require__(30);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(37);
+var _possibleConstructorReturn2 = __webpack_require__(31);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(38);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(10);
+var _react = __webpack_require__(9);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -26333,27 +26341,27 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getPrototypeOf = __webpack_require__(32);
+var _getPrototypeOf = __webpack_require__(26);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = __webpack_require__(35);
+var _classCallCheck2 = __webpack_require__(29);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(36);
+var _createClass2 = __webpack_require__(30);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(37);
+var _possibleConstructorReturn2 = __webpack_require__(31);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(38);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(10);
+var _react = __webpack_require__(9);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -26383,7 +26391,7 @@ var Marker = function (_React$Component) {
             }
         }
     }, {
-        key: 'writeJsonFile',
+        key: 'distanceLookup',
 
 
         // addressLookup(geocoder,map,building,position, onClick, func){
@@ -26404,78 +26412,24 @@ var Marker = function (_React$Component) {
         //     });
         // }
 
-        value: function writeJsonFile(geocoder, building) {
-            var _this2 = this;
 
-            var latLng = {
-                lat: undefined,
-                lng: undefined
-            };
-
-            geocoder.geocode({ 'address': building.address + ' Boston MA, USA' }, function (results, status) {
+        value: function distanceLookup(google, origin, dest, func) {
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [origin],
+                destinations: [dest],
+                travelMode: 'WALKING'
+            }, function (response, status) {
                 if (status === 'OK') {
-                    latLng.lat = results[0].geometry.location.lat();
-                    latLng.lng = results[0].geometry.location.lng();
-
-                    // fs.readFile('../../data/data.json', 'utf8', function readFileCallback(err, data){
-                    //     if (err){
-                    //         console.log(err);
-                    //     } else {
-                    //         obj = JSON.parse(data); //now it an object
-                    //         obj.table.push({lat: results[0].geometry.location.lat(), lng:latLng.lng = results[0].geometry.location.lng()}); //add some data
-                    //         json = JSON.stringify(obj); //convert it back to json
-                    //         fs.writeFile('../../data/data-written.json', json, 'utf8', callback); // write it back
-                    //     }});
-                } else if (status === 'OVER_QUERY_LIMIT') {
-                    setTimeout(function () {
-                        _this2.writeJsonFile(geocoder, building);
-                    }, 1000);
+                    var dist = response.rows[0].elements[0].distance.text;
+                    func(dist);
                 }
-                console.log(status, building.buildingName, latLng);
             });
         }
-
-        // distanceLookup(google, origin, dest, func){
-        //     const service = new google.maps.DistanceMatrixService();
-        //     service.getDistanceMatrix({
-        //             origins: [origin],
-        //             destinations: [dest],
-        //             travelMode: 'WALKING'
-        //         }, (response,status)=>{
-        //             if (status === 'OK') {
-        //                 const dist = response.rows[0].elements[0].distance.text;
-        //                 func(dist)
-        //             }
-        //
-        //     });
-        // }
-
-        // createMarker(google,map,latLng,building,dist,onClick){
-        //
-        //     const bldgIcon = {
-        //         url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
-        //         scaledSize: new google.maps.Size(30,30)
-        //     };
-        //
-        //     let marker = new google.maps.Marker({
-        //         map:map,
-        //         position: new google.maps.LatLng(latLng.lat,latLng.lng),
-        //         icon:bldgIcon,
-        //         building: building.buildingName,
-        //         count: building.fountains.length,
-        //         address: building.address,
-        //         distance: dist
-        //     });
-        //
-        //     marker.addListener('click',(evt)=>{
-        //         onClick(marker)
-        //     });
-        // }
-
     }, {
         key: 'renderMarker',
         value: function renderMarker() {
-            var _this3 = this;
+            var _this2 = this;
 
             // ...
             var _props = this.props,
@@ -26490,28 +26444,32 @@ var Marker = function (_React$Component) {
             var pos = position || mapCenter;
             position = new google.maps.LatLng(pos.lat, pos.lng);
 
-            var geocoder = new google.maps.Geocoder();
+            var bldgIcon = {
+                url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
+                scaledSize: new google.maps.Size(30, 30)
+            };
 
             buildings.map(function (building) {
-                _this3.writeJsonFile(geocoder, building);
-                // setTimeout(()=>{
-                //     this.addressLookup(geocoder,map,building, position, onClick, (latLng)=>{
-                //
-                //         if (typeof latLng.lat != 'undefined'){
-                //             this.distanceLookup(google,position,latLng, (dist)=>{
-                //                 this.createMarker(google,map,latLng,building,dist,onClick);
-                //             })
-                //         }
-                //     })
-                // },500);
-            });
-            var i = 0;
-            // setInterval(()=>{
-            //     console.log(i++);
-            // },1000);
+                var dest = {
+                    lat: building.lat,
+                    lng: building.lng
+                };
 
-            buildings.map(function (building) {
-                _this3.testTimeout(i);
+                _this2.distanceLookup(google, position, dest, function (dist) {
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: new google.maps.LatLng(building.lat, building.lng),
+                        icon: bldgIcon,
+                        building: building.buildingName,
+                        count: building.fountains.length,
+                        address: building.address,
+                        distance: dist
+                    });
+
+                    marker.addListener('click', function (evt) {
+                        onClick(marker);
+                    });
+                });
             });
 
             var locIcon = {
@@ -26526,13 +26484,6 @@ var Marker = function (_React$Component) {
                 icon: locIcon
             };
             new google.maps.Marker(locPref);
-        }
-    }, {
-        key: 'testTimeout',
-        value: function testTimeout(i) {
-            window.setTimeout(function () {
-                console.log(i++);
-            }, 2000);
         }
     }, {
         key: 'render',
@@ -26562,27 +26513,27 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _getPrototypeOf = __webpack_require__(32);
+var _getPrototypeOf = __webpack_require__(26);
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = __webpack_require__(35);
+var _classCallCheck2 = __webpack_require__(29);
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = __webpack_require__(36);
+var _createClass2 = __webpack_require__(30);
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = __webpack_require__(37);
+var _possibleConstructorReturn2 = __webpack_require__(31);
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = __webpack_require__(38);
+var _inherits2 = __webpack_require__(34);
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
-var _react = __webpack_require__(10);
+var _react = __webpack_require__(9);
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -26672,7 +26623,81 @@ exports.default = InfoWindow;
 /* 297 */
 /***/ (function(module, exports) {
 
-module.exports = [{"buildingName":"Metropolitan College","address":"755 Commonwealth Avenue","fountains":[{"floor":"1","description":"Next to room 1xx"},{"floor":"3","description":"Next to room 3xx"}]},{"buildingName":"College of Art and Science","address":"725 Commonwealth Avenue","fountains":[{"floor":"1","description":"Next to room 1xx"},{"floor":"3","description":"Next to room 3xx"}]},{"buildingName":"College of Art and Science","address":"725 Commonwealth Avenue","fountains":[{"floor":"1","description":"Next to room 1xx"},{"floor":"3","description":"Next to room 3xx"}]},{"buildingName":"Kenmore Classroom Building (KCB)","address":"565 Commonwealth Avenue","fountains":[{"floor":"1","description":"Outside 1st Floor Mens and Ladies room"}]},{"buildingName":"Danielsen Hall","address":"575 Commonwealth Avenue","fountains":[{"floor":"1","description":"Study Lounge"}]},{"buildingName":"Questrom School of Business / Rafik B. Hariri Building","address":"595 Commonwealth Avenue","fountains":[{"floor":"2","description":"Study Lounge"},{"floor":"3","description":"Study Lounge"}]},{"buildingName":"Metcalf Science Center","address":"590 Commonwealth Avenue","fountains":[{"floor":"B","description":"Basement by Elevator"}]},{"buildingName":"School of Education (SED)","address":"605 Commonwealth Avenue","fountains":[{"floor":"B","description":"Pickering Educational Resources�Library"},{"floor":"7","description":""}]},{"buildingName":"School of Education (SED)","address":"621 Commonwealth Avenue","fountains":[{"floor":"1","description":""},{"floor":"3","description":""}]},{"buildingName":"College of Health and Rehabilitation Sciences - Sargent College","address":"635 Commonwealth Avenue","fountains":[{"floor":"4","description":""}]},{"buildingName":"Fitness and Recreation Center","address":"915 Commonwealth Avenue","fountains":[{"floor":"L1","description":""},{"floor":"G","description":"Near Mens/Ladies room"},{"floor":"2","description":"Near Mens/Ladies room"},{"floor":"3","description":"Near Mens/Ladies room"}]},{"buildingName":"School of Hospitality ","address":"928 Commonwealth Avenue","fountains":[{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""}]},{"buildingName":"Student Employment Office","address":"881 Commonwealth Avenue","fountains":[{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""}]},{"buildingName":"College of Fine Arts","address":"855 Commonwealth Avenue","fountains":[{"floor":"B","description":""},{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""},{"floor":"4","description":""}]},{"buildingName":"Fuller Building","address":"808 Commonwealth Avenue","fountains":[{"floor":"2","description":""},{"floor":"4","description":""}]},{"buildingName":"College of General Studies","address":"871 Commonwealth Avenue","fountains":[{"floor":"1","description":""},{"floor":"5","description":""}]},{"buildingName":"Rajen Kilachand Center for Integrated Life Sciences & Engineering","address":"610 Commonwealth Avenue","fountains":[{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""},{"floor":"4","description":""},{"floor":"5","description":""},{"floor":"6","description":""},{"floor":"7","description":""},{"floor":"8","description":""},{"floor":"9","description":""}]},{"buildingName":"College of Communication","address":"640 Commonwealth Avenue","fountains":[{"floor":"1","description":""},{"floor":"2","description":""}]},{"buildingName":"Warren Towers (Housing)","address":"700 Commonwealth Avenue","fountains":[{"floor":"4","description":""}]},{"buildingName":"Stone Science Building","address":"675 Commonwealth Avenue","fountains":[{"floor":"1","description":"Next to Ladies Room"},{"floor":"B","description":"Between Men and Ladies Room"}]},{"buildingName":"Tsai Performance Center","address":"685 Commonwealth Avenue","fountains":[{"floor":"3","description":"Next to Room 302"},{"floor":"3","description":"Next to Room 312"}]},{"buildingName":"Graduate School of Arts & Sciences","address":"705 Commonwealth Avenue","fountains":[{"floor":"3","description":"Next to Room 318"}]},{"buildingName":"College of Arts and Sciences","address":"725 Commonwealth Avenue","fountains":[{"floor":"3","description":"Next to Room 325"},{"floor":"3","description":"Next to Room 335"},{"floor":"4","description":"Next to Room 416"}]},{"buildingName":"Marsh Chapel","address":"735 Commonwealth Avenue","fountains":[{"floor":"B","description":"Between Mens and Ladies Room"}]},{"buildingName":"Boston University School of Theology","address":"745 Commonwealth Avenue","fountains":[{"floor":"B","description":"Next to Sprinkler Room"},{"floor":"1","description":"Next to Room 115"}]},{"buildingName":"Mugar Memorial Library","address":"771 Commonwealth Avenue","fountains":[{"floor":"1","description":"Next to Ladies Room"},{"floor":"3","description":"Next to Ladies Room"}]},{"buildingName":"George Sherman Union","address":"775 Commonwealth Avenue","fountains":[{"floor":"1","description":"Infront of Rhett's"},{"floor":"1","description":"Near Backcourt"},{"floor":"2","description":"Across from Room 204"},{"floor":"4","description":"Across from Room 405"}]},{"buildingName":"School of Law","address":"765 Commonwealth Avenue","fountains":[{"floor":"1","description":"Near Gender Inclusive Bathroom"},{"floor":"M","description":"Across from Room 215"},{"floor":"2","description":"Across from Room 215"},{"floor":"3","description":"Between Mens and Ladies Room"},{"floor":"4","description":"Between Mens and Ladies Room"},{"floor":"5","description":"Between Faculty Mens and Ladies Room"},{"floor":"6","description":"Across from Room 604"},{"floor":"7","description":"Between Mens and Ladies Room"},{"floor":"8","description":"Between Mens and Ladies Room"},{"floor":"9","description":"Across from Room 902"},{"floor":"10","description":"Across from Room 1003"},{"floor":"11","description":"Between Mens and Ladies Room"},{"floor":"12","description":"Across from Room 1202"},{"floor":"13","description":"Between Mens and Ladies Room"},{"floor":"14","description":"Between Mens and Ladies Room"},{"floor":"15","description":"Between Mens and Ladies Room"},{"floor":"16","description":"Between Mens and Ladies Room"},{"floor":"17","description":"Between Mens and Ladies Room"}]}]
+module.exports = [{"buildingName":"Metropolitan College","address":"755 Commonwealth Avenue","lat":42.3505358,"lng":-71.10764039999998,"fountains":[{"floor":"1","description":"Next to room 1xx"},{"floor":"3","description":"Next to room 3xx"}]},{"buildingName":"College of Art and Science","address":"725 Commonwealth Avenue","lat":42.3502592,"lng":-71.10571729999998,"fountains":[{"floor":"1","description":"Next to room 1xx"},{"floor":"3","description":"Next to room 3xx"}]},{"buildingName":"Kenmore Classroom Building (KCB)","address":"565 Commonwealth Avenue","lat":42.349417,"lng":-71.09809789999997,"fountains":[{"floor":"1","description":"Outside 1st Floor Mens and Ladies room"}]},{"buildingName":"Danielsen Hall","address":"575 Commonwealth Avenue","lat":42.3494615,"lng":-71.09871509999999,"fountains":[{"floor":"1","description":"Study Lounge"}]},{"buildingName":"Questrom School of Business / Rafik B. Hariri Building","address":"595 Commonwealth Avenue","lat":42.349626,"lng":-71.0995466,"fountains":[{"floor":"2","description":"Study Lounge"},{"floor":"3","description":"Study Lounge"}]},{"buildingName":"Metcalf Science Center","address":"590 Commonwealth Avenue","lat":42.3484191,"lng":-71.10019520000003,"fountains":[{"floor":"B","description":"Basement by Elevator"}]},{"buildingName":"School of Education (SED)","address":"605 Commonwealth Avenue","lat":42.3493886,"lng":-71.10063130000003,"fountains":[{"floor":"B","description":"Pickering Educational Resources�Library"},{"floor":"7","description":""}]},{"buildingName":"School of Education (SED)","address":"621 Commonwealth Avenue","lat":42.3497372,"lng":-71.10133819999999,"fountains":[{"floor":"1","description":""},{"floor":"3","description":""}]},{"buildingName":"College of Health and Rehabilitation Sciences - Sargent College","address":"635 Commonwealth Avenue","lat":42.3498796,"lng":-71.1019296,"fountains":[{"floor":"4","description":""}]},{"buildingName":"Fitness and Recreation Center","address":"915 Commonwealth Avenue","lat":42.3517631,"lng":-71.11659050000003,"fountains":[{"floor":"L1","description":""},{"floor":"G","description":"Near Mens/Ladies room"},{"floor":"2","description":"Near Mens/Ladies room"},{"floor":"3","description":"Near Mens/Ladies room"}]},{"buildingName":"School of Hospitality ","address":"928 Commonwealth Avenue","lat":42.3509006,"lng":-71.11748840000001,"fountains":[{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""}]},{"buildingName":"Student Employment Office","address":"881 Commonwealth Avenue","lat":42.3514502,"lng":-71.1152318,"fountains":[{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""}]},{"buildingName":"College of Fine Arts","address":"855 Commonwealth Avenue","lat":42.35147800000001,"lng":-71.1138732,"fountains":[{"floor":"B","description":""},{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""},{"floor":"4","description":""}]},{"buildingName":"Fuller Building","address":"808 Commonwealth Avenue","lat":42.3501765,"lng":-71.11181340000002,"fountains":[{"floor":"2","description":""},{"floor":"4","description":""}]},{"buildingName":"College of General Studies","address":"871 Commonwealth Avenue","lat":42.3514857,"lng":-71.1145665999999,"fountains":[{"floor":"1","description":""},{"floor":"5","description":""}]},{"buildingName":"Rajen Kilachand Center for Integrated Life Sciences & Engineering","address":"610 Commonwealth Avenue","lat":42.3490613,"lng":-71.1015425,"fountains":[{"floor":"1","description":""},{"floor":"2","description":""},{"floor":"3","description":""},{"floor":"4","description":""},{"floor":"5","description":""},{"floor":"6","description":""},{"floor":"7","description":""},{"floor":"8","description":""},{"floor":"9","description":""}]},{"buildingName":"College of Communication","address":"640 Commonwealth Avenue","lat":42.34883869999999,"lng":-71.10231479999999,"fountains":[{"floor":"1","description":""},{"floor":"2","description":""}]},{"buildingName":"Warren Towers (Housing)","address":"700 Commonwealth Avenue","lat":42.34950730000001,"lng":-71.10483750000003,"fountains":[{"floor":"4","description":""}]},{"buildingName":"Stone Science Building","address":"675 Commonwealth Avenue","lat":42.3501029,"lng":-71.1037839,"fountains":[{"floor":"1","description":"Next to Ladies Room"},{"floor":"B","description":"Between Men and Ladies Room"}]},{"buildingName":"Tsai Performance Center","address":"685 Commonwealth Avenue","lat":42.3501152,"lng":-71.10457480000002,"fountains":[{"floor":"3","description":"Next to Room 302"},{"floor":"3","description":"Next to Room 312"}]},{"buildingName":"Graduate School of Arts & Sciences","address":"705 Commonwealth Avenue","lat":42.3501634,"lng":-71.10516129999996,"fountains":[{"floor":"3","description":"Next to Room 318"}]},{"buildingName":"College of Arts and Sciences","address":"725 Commonwealth Avenue","lat":42.3502592,"lng":-71.10571729999998,"fountains":[{"floor":"3","description":"Next to Room 325"},{"floor":"3","description":"Next to Room 335"},{"floor":"4","description":"Next to Room 416"}]},{"buildingName":"Marsh Chapel","address":"735 Commonwealth Avenue","lat":42.3506588,"lng":-71.10642530000001,"fountains":[{"floor":"B","description":"Between Mens and Ladies Room"}]},{"buildingName":"Boston University School of Theology","address":"745 Commonwealth Avenue","lat":42.3504873,"lng":-71.1073553,"fountains":[{"floor":"B","description":"Next to Sprinkler Room"},{"floor":"1","description":"Next to Room 115"}]},{"buildingName":"Mugar Memorial Library","address":"771 Commonwealth Avenue","lat":42.3507232,"lng":-71.10822669999999,"fountains":[{"floor":"1","description":"Next to Ladies Room"},{"floor":"3","description":"Next to Ladies Room"}]},{"buildingName":"George Sherman Union","address":"775 Commonwealth Avenue","lat":42.3509178,"lng":-71.10895099999999,"fountains":[{"floor":"1","description":"Infront of Rhett's"},{"floor":"1","description":"Near Backcourt"},{"floor":"2","description":"Across from Room 204"},{"floor":"4","description":"Across from Room 405"}]},{"buildingName":"School of Law","address":"765 Commonwealth Avenue","lat":42.3509792,"lng":-71.10702309999999,"fountains":[{"floor":"1","description":"Near Gender Inclusive Bathroom"},{"floor":"M","description":"Across from Room 215"},{"floor":"2","description":"Across from Room 215"},{"floor":"3","description":"Between Mens and Ladies Room"},{"floor":"4","description":"Between Mens and Ladies Room"},{"floor":"5","description":"Between Faculty Mens and Ladies Room"},{"floor":"6","description":"Across from Room 604"},{"floor":"7","description":"Between Mens and Ladies Room"},{"floor":"8","description":"Between Mens and Ladies Room"},{"floor":"9","description":"Across from Room 902"},{"floor":"10","description":"Across from Room 1003"},{"floor":"11","description":"Between Mens and Ladies Room"},{"floor":"12","description":"Across from Room 1202"},{"floor":"13","description":"Between Mens and Ladies Room"},{"floor":"14","description":"Between Mens and Ladies Room"},{"floor":"15","description":"Between Mens and Ladies Room"},{"floor":"16","description":"Between Mens and Ladies Room"},{"floor":"17","description":"Between Mens and Ladies Room"}]}]
+
+/***/ }),
+/* 298 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _getPrototypeOf = __webpack_require__(26);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(29);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(30);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(31);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(34);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _react = __webpack_require__(9);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Sidebar = function (_React$Component) {
+    (0, _inherits3.default)(Sidebar, _React$Component);
+
+    function Sidebar() {
+        (0, _classCallCheck3.default)(this, Sidebar);
+        return (0, _possibleConstructorReturn3.default)(this, (Sidebar.__proto__ || (0, _getPrototypeOf2.default)(Sidebar)).apply(this, arguments));
+    }
+
+    (0, _createClass3.default)(Sidebar, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(
+                    "nav",
+                    { id: "sidebar" },
+                    _react2.default.createElement(
+                        "div",
+                        { "class": "sidebar-header" },
+                        _react2.default.createElement(
+                            "h3",
+                            null,
+                            "Thirsty eh?"
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+    return Sidebar;
+}(_react2.default.Component); /**
+                               * Created by bowenjiang on 11/18/17.
+                               */
+
+exports.default = Sidebar;
 
 /***/ })
 /******/ ]);
