@@ -31,8 +31,9 @@ export default class List extends React.Component{
 
     render(){
         const buildings = this.props.buildings;
+
         return(
-            <div>
+            <div style={style}>
                 <ul>
                     {buildings.map((b,i)=>(
                         <li key={i} onClick={ () => this.toggle(i)}>

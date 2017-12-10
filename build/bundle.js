@@ -32160,7 +32160,7 @@ var Sidebar = function (_React$Component) {
                 width: '20vw',
                 color: '#fff',
                 background: '#29363d',
-                overflowY: 'scroll'
+                overflow: 'auto'
             };
             return _react2.default.createElement(
                 'div',
@@ -35665,7 +35665,9 @@ var List = function (_React$Component) {
                                         return _react2.default.createElement(
                                             'li',
                                             { key: i },
+                                            'Floor ',
                                             f.floor,
+                                            ', ',
                                             f.description == "" ? "Try find it!" : f.description
                                         );
                                     })
