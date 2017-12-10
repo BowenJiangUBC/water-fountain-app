@@ -38,13 +38,8 @@ export class MapContainer extends React.Component {
     };
 
     render(){
-        const style={
-            width: '100vw',
-            height: '100vh'
-        };
-
         return(
-            <div style={style}>
+            <div>
                 <Map google={this.props.google}>
 
                     <Marker

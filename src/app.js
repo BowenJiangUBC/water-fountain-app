@@ -9,15 +9,17 @@ class App extends React.Component{
 
 
 	render(){
+		const style={
+			display:'flex',
+			flexDirection: 'row'
+		};
 		return(
-			<div className="wrapper">
-
-                <Sidebar
-                    buildings={data}
-                />
+			<div style={style}>
+				<Sidebar
+					buildings={data}
+				/>
 
 				<MapContainer
-                    id="mapContainer"
 					buildings={data}
 				/>
 			</div>

@@ -103,8 +103,8 @@ export default class Map extends React.Component{
 
     render() {
         const style = {
-            minWidth: '400px',
-            minHeight: '400px'
+            width: '80vw',
+            height: '100vh'
         };
         return (
             <div style={style} ref='map'>

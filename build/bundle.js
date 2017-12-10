@@ -11531,7 +11531,7 @@ var App = function (_React$Component) {
 		value: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ 'class': 'wrapper' },
+				null,
 				_react2.default.createElement(_Sidebar2.default, {
 					buildings: _data2.default
 				}),
@@ -23976,8 +23976,8 @@ var MapContainer = exports.MapContainer = function (_React$Component) {
         key: 'render',
         value: function render() {
             var style = {
-                width: '90vw',
-                height: '90vh'
+                width: '100vw',
+                height: '100vh'
             };
 
             return _react2.default.createElement(
@@ -26671,23 +26671,16 @@ var Sidebar = function (_React$Component) {
     }
 
     (0, _createClass3.default)(Sidebar, [{
-        key: "render",
+        key: 'render',
         value: function render() {
+            var sidebar = {};
             return _react2.default.createElement(
-                "div",
-                null,
+                'div',
+                { style: sidebar },
                 _react2.default.createElement(
-                    "nav",
-                    { id: "sidebar" },
-                    _react2.default.createElement(
-                        "div",
-                        { "class": "sidebar-header" },
-                        _react2.default.createElement(
-                            "h3",
-                            null,
-                            "Thirsty eh?"
-                        )
-                    )
+                    'nav',
+                    null,
+                    'side bar'
                 )
             );
         }
