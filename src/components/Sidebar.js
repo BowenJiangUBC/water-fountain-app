@@ -19,7 +19,8 @@ export default class Sidebar extends React.Component{
         const sidebar={
             width:'20vw',
             color: '#fff',
-            background: '#29363d'
+            background: '#29363d',
+            overflowY: 'scroll'
         };
         return(
             <div style={sidebar}>
