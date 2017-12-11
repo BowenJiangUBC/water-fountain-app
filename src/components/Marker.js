@@ -38,6 +38,8 @@ export default class Marker extends React.Component{
     // }
 
 
+
+
     distanceLookup(google, origin, dest, func){
         const service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix({
@@ -53,10 +55,23 @@ export default class Marker extends React.Component{
         });
     }
 
+    findClosestMarker(markers,func){
+        let nearestMarker = markers[0]
+        markers.map((marker)=>{
+            const minDist = parseFloat(nearestMarker.distance);
+            const currDist = parseFloat(marker.distance);
+            if (currDist<=minDist){
+                nearestMarker = marker;
+            }
+        });
+
+        func(nearestMarker);
+    }
+
     renderMarker() {
         // ...
         let {
-            map, google, position, mapCenter, buildings,onClick
+            map, google, position, mapCenter, buildings,onClick,findNear
         } = this.props;
 
         let pos = position || mapCenter;
@@ -66,6 +81,8 @@ export default class Marker extends React.Component{
             url: 'http://www.stopsignsandmore.com/images/Product/medium/1573.gif',
             scaledSize: new google.maps.Size(30,30)
         };
+
+        const markers = [];
 
         buildings.map((building)=>{
             let dest = {
@@ -87,9 +104,17 @@ export default class Marker extends React.Component{
                 marker.addListener('click',(evt)=>{
                     onClick(marker)
                 });
-            })
 
+                markers.push(marker);
+                if(markers.length==buildings.length){
+                    this.findClosestMarker(markers,(nearestMarker)=>{
+                        findNear(nearestMarker)
+                    })
+                }
+            })
         });
+
+
 
         const locIcon = {
             url: 'http://icons.iconarchive.com/icons/hopstarter/soft-scraps/256/Button-Blank-Blue-icon.png',

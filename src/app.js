@@ -6,6 +6,20 @@ import Sidebar from './components/Sidebar';
 
 
 class App extends React.Component{
+	constructor(props){
+		super(props)
+		this.passNearestMarker = this.passNearestMarker.bind(this);
+		this.state={
+			nearestMarker:{}
+		}
+	}
+
+	passNearestMarker(marker){
+		this.setState({
+			nearestMarker:marker
+		})
+
+	}
 
 
 	render(){
@@ -17,10 +31,12 @@ class App extends React.Component{
 			<div style={style}>
 				<Sidebar
 					buildings={data}
+					nearestMarker={this.state.nearestMarker}
 				/>
 
 				<MapContainer
 					buildings={data}
+					passMarker={this.passNearestMarker}
 				/>
 			</div>
 			)

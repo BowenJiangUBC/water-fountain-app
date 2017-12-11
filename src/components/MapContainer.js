@@ -14,11 +14,13 @@ export class MapContainer extends React.Component {
         super(props);
 
         this.onMarkerClick = this.onMarkerClick.bind(this);
+        this.findNearestMarker = this.findNearestMarker.bind(this);
 
 
         this.state = {
             showingInfoWindow: false,
             activeMarker: {},
+            nearestMarker: {},
             selectedBuilding:"",
             fountainNumber:0,
             address:"",
@@ -37,6 +39,14 @@ export class MapContainer extends React.Component {
         });
     };
 
+    findNearestMarker(marker){
+        this.setState({
+            nearestMarker: marker
+        });
+        let {passMarker}=this.props;
+        passMarker(marker);
+    }
+
     render(){
         return(
             <div>
@@ -45,7 +55,8 @@ export class MapContainer extends React.Component {
                     <Marker
                         buildings={this.props.buildings}
                         onClick={this.onMarkerClick}
-                        addMarker={this.addMarker}/>
+                        findNear={this.findNearestMarker}
+                        />
 
                     <InfoWindow
                         {...this.props}

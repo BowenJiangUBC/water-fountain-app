@@ -33,7 +33,7 @@ export default class List extends React.Component{
         const buildings = this.props.buildings;
 
         return(
-            <div style={style}>
+            <div>
                 <ul>
                     {buildings.map((b,i)=>(
                         <li key={i} onClick={ () => this.toggle(i)}>

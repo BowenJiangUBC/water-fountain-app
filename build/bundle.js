@@ -32159,6 +32159,7 @@ var Sidebar = function (_React$Component) {
             var sidebar = {
                 width: '20vw',
                 color: '#fff',
+                height: '100vh',
                 background: '#29363d',
                 overflow: 'auto'
             };
@@ -32168,7 +32169,11 @@ var Sidebar = function (_React$Component) {
                 _react2.default.createElement(
                     _reactstrap.Navbar,
                     null,
-                    'BowenJiangUBC@Github',
+                    _react2.default.createElement(
+                        _reactstrap.NavbarBrand,
+                        { href: 'https://github.com/BowenJiangUBC/water-fountain-app' },
+                        'BowenJiangUBC@Github'
+                    ),
                     _react2.default.createElement(
                         _reactstrap.Nav,
                         { vertical: true, tabs: true },
@@ -35642,6 +35647,7 @@ var List = function (_React$Component) {
             var _this2 = this;
 
             var buildings = this.props.buildings;
+
             return _react2.default.createElement(
                 'div',
                 null,

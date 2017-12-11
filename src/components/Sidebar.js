@@ -4,7 +4,8 @@
 
 import React from 'react';
 import { Nav, NavItem, NavLink,  NavbarBrand,Navbar } from 'reactstrap';
-import List from './List'
+import List from './List';
+import Input from './Input';
 
 export default class Sidebar extends React.Component{
     constructor(props){
@@ -12,7 +13,8 @@ export default class Sidebar extends React.Component{
         const {buildings}=this.props.buildings;
         this.state={
             buildings:buildings
-        }
+        };
+
     }
 
     render(){
@@ -26,7 +28,8 @@ export default class Sidebar extends React.Component{
         return(
             <div style={sidebar}>
                 <Navbar >
-                    BowenJiangUBC@Github
+                    <NavbarBrand href="https://github.com/BowenJiangUBC/water-fountain-app">BowenJiangUBC@Github</NavbarBrand>
+
                     <Nav vertical tabs>
                         <NavItem>
                             <NavLink href="#1a" data-toggle="tab" >Recommand</NavLink>
@@ -41,7 +44,9 @@ export default class Sidebar extends React.Component{
 
 
                     <div className="tab-pane active" id="1a">
-                        Content's background color is the same for the tab
+                        <Input
+                            nearestMarker={this.props.nearestMarker}
+                        />
                     </div>
                     <div className="tab-pane" id="1b">
                         <List buildings={this.props.buildings}>
